@@ -112,10 +112,6 @@ export function handleClick(event) {
  */
 export function toggleAutoclick() {
     const currentState = stateManager.getState();
-    if (!currentState.autoclickUnlocked) {
-        showNotification('Autoclick is locked until Rebirth 3!');
-        return false;
-    }
     const nextState = !currentState.autoclickEnabled;
     stateManager.setState({ autoclickEnabled: nextState });
     saveGame();
@@ -132,7 +128,7 @@ export function toggleAutoclick() {
 export function handleAutoclick(count = 1) {
     if (count <= 0) return false;
     const currentState = stateManager.getState();
-    if (!currentState.autoclickUnlocked || !currentState.autoclickEnabled) return false;
+    if (!currentState.autoclickEnabled) return false;
 
     // Calculate click reward per autoclick (isManualClick = false)
     const result = calculateClickReward(currentState, false);

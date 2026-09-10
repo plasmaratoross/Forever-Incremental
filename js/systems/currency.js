@@ -18,14 +18,25 @@ import { getCurrentEventGameSpeedMult } from './cosmicEvents.js';
  * @param {number} amount - Amount of currency points to add
  */
 export function addCurrency(amount) {
+    if (!amount || isNaN(amount) || amount <= 0) return;
     const currentState = stateManager.getState();
-    const updatedCurrency = currentState.currency + amount;
+    const currentCurrency = (typeof currentState.currency === 'number' && !isNaN(currentState.currency))
+        ? currentState.currency
+        : (typeof currentState.points === 'number' && !isNaN(currentState.points) ? currentState.points : 0);
+    
+    const updatedCurrency = currentCurrency + amount;
+
+    const currentStats = currentState.stats || {};
+    const currentEarned = (typeof currentStats.totalCurrencyEarned === 'number' && !isNaN(currentStats.totalCurrencyEarned))
+        ? currentStats.totalCurrencyEarned
+        : 0;
     
     stateManager.setState({
         currency: updatedCurrency,
+        points: updatedCurrency,
         stats: {
-            ...currentState.stats,
-            totalCurrencyEarned: currentState.stats.totalCurrencyEarned + amount
+            ...currentStats,
+            totalCurrencyEarned: currentEarned + amount
         }
     });
 }

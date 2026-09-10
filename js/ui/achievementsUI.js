@@ -198,47 +198,54 @@ export function renderAchievementsUI(containerId) {
             }
         });
 
-        // Handle Lore Modal overlay updates
+        // Handle Lore Modal overlay updates in-place (flicker-free)
         const loreModalContainer = document.getElementById('ach-lore-modal-container');
         if (!activeLoreModal) {
             activeLoreModal = checkPendingLoreMilestones(state);
         }
 
         if (loreModalContainer) {
-            if (activeLoreModal) {
-                loreModalContainer.innerHTML = `
-                    <div class="modal-overlay lore-modal-overlay">
-                        <div class="modal-card lore-modal-card">
-                            <div class="lore-modal-header">
-                                <span class="lore-spark">✨</span>
-                                <h3 class="lore-dialogue-title">${activeLoreModal.title}</h3>
-                            </div>
-                            <div class="lore-text-box">
-                                <p class="lore-dialogue-text">"${activeLoreModal.text}"</p>
-                            </div>
-                            <div class="lore-modal-footer">
-                                <span class="lore-milestone-tag">${activeLoreModal.categoryName} — Level ${activeLoreModal.level}</span>
-                                <button id="lore-continue-btn" class="click-btn primary-action-btn lore-continue-btn">
-                                    [ CONTINUE ]
-                                </button>
+            const currentLoreKey = activeLoreModal ? activeLoreModal.loreKey : null;
+            const existingKey = loreModalContainer.dataset.renderedLoreKey || null;
+
+            if (currentLoreKey !== existingKey) {
+                loreModalContainer.dataset.renderedLoreKey = currentLoreKey || '';
+                if (activeLoreModal) {
+                    loreModalContainer.innerHTML = `
+                        <div class="modal-overlay lore-modal-overlay">
+                            <div class="modal-card lore-modal-card">
+                                <div class="lore-modal-header">
+                                    <span class="lore-spark">✨</span>
+                                    <h3 class="lore-dialogue-title">${activeLoreModal.title}</h3>
+                                </div>
+                                <div class="lore-text-box">
+                                    <p class="lore-dialogue-text">"${activeLoreModal.text}"</p>
+                                </div>
+                                <div class="lore-modal-footer">
+                                    <span class="lore-milestone-tag">${activeLoreModal.categoryName} — Level ${activeLoreModal.level}</span>
+                                    <button id="lore-continue-btn" class="click-btn primary-action-btn lore-continue-btn">
+                                        [ CONTINUE ]
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                `;
+                    `;
 
-                const continueBtn = document.getElementById('lore-continue-btn');
-                if (continueBtn) {
-                    continueBtn.addEventListener('click', () => {
-                        if (activeLoreModal) {
-                            markLoreMilestoneViewed(activeLoreModal.loreKey);
-                            activeLoreModal = null;
-                            loreModalContainer.innerHTML = '';
-                            updateDOM();
-                        }
-                    });
+                    const continueBtn = document.getElementById('lore-continue-btn');
+                    if (continueBtn) {
+                        continueBtn.addEventListener('click', () => {
+                            if (activeLoreModal) {
+                                markLoreMilestoneViewed(activeLoreModal.loreKey);
+                                activeLoreModal = null;
+                                loreModalContainer.dataset.renderedLoreKey = '';
+                                loreModalContainer.innerHTML = '';
+                                updateDOM();
+                            }
+                        });
+                    }
+                } else {
+                    loreModalContainer.innerHTML = '';
                 }
-            } else {
-                loreModalContainer.innerHTML = '';
             }
         }
     };

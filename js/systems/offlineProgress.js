@@ -52,9 +52,8 @@ export function calculateAndApplyOfflineProgress(safeState) {
     const totalGenPerSec = (rebirthCount >= 2) ? getTotalPointGeneration(safeState) : 0;
     const generatorPoints = totalGenPerSec * offlineSeconds;
 
-    // 2. Calculate Auto Clicker Earnings (Rebirth 3+ & Autoclick Enabled)
-    const isAutoclickUnlocked = rebirthCount >= 3 || safeState.autoclickUnlocked;
-    const isAutoclickActive = isAutoclickUnlocked && !!safeState.autoclickEnabled;
+    // 2. Calculate Auto Clicker Earnings (Autoclick Enabled)
+    const isAutoclickActive = !!safeState.autoclickEnabled;
 
     const autoclickCPS = 5.0; // Base 5 clicks per second
     const totalAutoclicks = isAutoclickActive ? Math.floor(offlineSeconds * autoclickCPS) : 0;

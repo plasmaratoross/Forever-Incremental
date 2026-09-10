@@ -49,17 +49,23 @@ export function loadGame() {
         const rebirthCount = parsedState.rebirthCount || 0;
         const isEfficientInstinctActive = (rebirthCount >= 2) || (parsedState.rebirthUpgrades && parsedState.rebirthUpgrades.efficient_instinct) || false;
 
+        const loadedCurrency = (typeof parsedState.currency === 'number' && !isNaN(parsedState.currency))
+            ? parsedState.currency
+            : (typeof parsedState.points === 'number' && !isNaN(parsedState.points) ? parsedState.points : 0);
+
         const safeState = {
             rebirthCount: 0,
-            points: 0,
+            currency: loadedCurrency,
+            points: loadedCurrency,
             generators: { condenser: 0, extractor: 0, reactor: 0, core: 0, singularity: 0 },
             advancedClickingUnlocked: (rebirthCount >= 1 || parsedState.advancedClickingUnlocked || false),
-            autoclickUnlocked: (rebirthCount >= 3 || parsedState.autoclickUnlocked || false),
+            autoclickUnlocked: true,
             autoclickEnabled: parsedState.autoclickEnabled || false,
             cosmicEventsUnlocked: (rebirthCount >= 3 || parsedState.cosmicEventsUnlocked || false),
             rebirthUpgrades: { efficient_instinct: isEfficientInstinctActive },
             ...parsedState,
-            points: parsedState.points || 0,
+            currency: loadedCurrency,
+            points: loadedCurrency,
             generators: {
                 condenser: 0,
                 extractor: 0,
@@ -69,7 +75,7 @@ export function loadGame() {
                 ...(parsedState.generators || {})
             },
             advancedClickingUnlocked: (rebirthCount >= 1 || parsedState.advancedClickingUnlocked || false),
-            autoclickUnlocked: (rebirthCount >= 3 || parsedState.autoclickUnlocked || false),
+            autoclickUnlocked: true,
             autoclickEnabled: parsedState.autoclickEnabled || false,
             cosmicEventsUnlocked: (rebirthCount >= 3 || parsedState.cosmicEventsUnlocked || false),
             cosmicEventState: parsedState.cosmicEventState || null,

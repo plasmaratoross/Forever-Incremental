@@ -73,12 +73,10 @@ export function renderGameUI(containerId) {
                     <div class="click-card-actions">
                         <button id="click-btn" class="click-btn">${t('clickBtn')}</button>
 
-                        <!-- Autoclick Toggle Button (Unlocked at Rebirth 3) -->
-                        ${isAutoclickUnlocked ? `
-                            <button id="autoclick-toggle-btn" class="click-btn ${state.autoclickEnabled ? 'autoclick-on' : 'secondary-btn'} autoclick-btn">
-                                <span>🤖 ${t('autoclickLabel')} ${state.autoclickEnabled ? t('autoclickOn') : t('autoclickOff')}</span>
-                            </button>
-                        ` : ''}
+                        <!-- Autoclick Toggle Button (Free access for everyone, located directly below clicking object) -->
+                        <button id="autoclick-toggle-btn" class="click-btn ${state.autoclickEnabled ? 'autoclick-on' : 'secondary-btn'} autoclick-btn">
+                            <span>🤖 ${t('autoclickLabel')} ${state.autoclickEnabled ? t('autoclickOn') : t('autoclickOff')}</span>
+                        </button>
                         
                         <!-- Clicking Upgrades Navigation Button -->
                         <a href="upgrades.html" class="click-btn secondary-btn upgrade-nav-btn">
@@ -280,6 +278,13 @@ export function renderGameUI(containerId) {
                     </button>
                 `;
             }
+        }
+
+        // Update Autoclick toggle button in-place
+        const autoclickBtn = document.getElementById('autoclick-toggle-btn');
+        if (autoclickBtn) {
+            autoclickBtn.className = `click-btn ${state.autoclickEnabled ? 'autoclick-on' : 'secondary-btn'} autoclick-btn`;
+            autoclickBtn.innerHTML = `<span>🤖 ${t('autoclickLabel')} ${state.autoclickEnabled ? t('autoclickOn') : t('autoclickOff')}</span>`;
         }
 
         const upgradeNavText = document.getElementById('upgrade-nav-text');

@@ -65,7 +65,7 @@ export class GameEngine {
         const totalGameSpeed = debugSpeed * eventSpeed;
         const autoclickSpeed = 1.0 + 0.10 * (totalGameSpeed - 1.0);
 
-        if (state.autoclickUnlocked && state.autoclickEnabled) {
+        if (state.autoclickEnabled) {
             this.autoclickAccumulator += GAME_CONFIG.TICK_RATE * autoclickSpeed;
             let autoclickCount = 0;
             while (this.autoclickAccumulator >= 200) {

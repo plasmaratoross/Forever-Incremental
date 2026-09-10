@@ -28,7 +28,7 @@ export const INITIAL_STATE = {
     rebirthCount: 0,               // Persistent total number of rebirths performed
     rebirthMultiplier: 1,          // Base multiplier applied to currency earnings
     advancedClickingUnlocked: false, // Permanent unlock flag for Tier-2 Advanced Upgrades
-    autoclickUnlocked: false,        // Permanent unlock flag for Autoclick (Unlocked at Rebirth 3)
+    autoclickUnlocked: true,         // Permanent unlock flag for Autoclick (Free access for everyone)
     autoclickEnabled: false,         // Autoclick ON/OFF toggle state
     cosmicEventsUnlocked: false,     // Permanent unlock flag for Cosmic Events System (Unlocked at Rebirth 3)
     cosmicEventState: null,          // Serialized Cosmic Events state snapshot { status, nextRollTime, activeEvent }

@@ -28,12 +28,13 @@ export function renderMenu(containerId) {
     const pathname = window.location.pathname.toLowerCase();
     const isGamePage = pathname.endsWith('game.html') || pathname.includes('/game.html');
     const isHomePage = pathname.endsWith('index.html') || pathname.endsWith('/') || (!pathname.includes('.html') && !pathname.includes('/pages/'));
-    
+    const isMainMenuSection = pathname.includes('options.html') || pathname.includes('save.html'); // Settings & Data return to Main Menu
+
     if (isHomePage) {
         // On Main Menu landing page: Keep top bar clean
         container.innerHTML = ``;
-    } else if (isGamePage) {
-        // On Gameplay Zone page (game.html): Display "⬅ Back to Main Menu" button
+    } else if (isGamePage || isMainMenuSection) {
+        // On Gameplay Zone page (game.html), Settings (options.html), or Data (save.html): Display "⬅ Back to Main Menu" button
         const homePath = pathname.includes('/pages/') ? '../index.html' : 'index.html';
 
         container.innerHTML = `
@@ -52,7 +53,7 @@ export function renderMenu(containerId) {
             });
         }
     } else {
-        // Inside gameplay sections (upgrades, generators, achievements, badges, gallery, stats, options, save):
+        // Inside gameplay sub-sections (upgrades, generators, achievements, badges, gallery, stats):
         // Display "⬅ Back to Gameplay Zone" button
         const gamePath = pathname.includes('/pages/') ? 'game.html' : 'pages/game.html';
 
