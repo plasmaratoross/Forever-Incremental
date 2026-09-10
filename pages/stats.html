@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!-- ====================================================================== -->
+<!-- STATISTICS WEBPAGE (pages/stats.html)                                 -->
+<!-- Purpose: Read-only telemetry dashboard displaying current status,       -->
+<!--          lifetime statistics, records, progression summary, and        -->
+<!--          cosmic events telemetry.                                      -->
+<!-- ====================================================================== -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics - Forever Incremental</title>
+    <meta name="description" content="View your live gameplay telemetry and lifetime records in Forever Incremental.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/game.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation Header (Displays Back to Main Menu Button) -->
+        <header class="top-bar">
+            <div class="logo-group">
+                <img src="../assets/images/logo.png" alt="Forever Incremental Logo" class="game-logo-img">
+                <h1 class="logo">Forever Incremental</h1>
+            </div>
+            <nav id="menu-container"></nav>
+        </header>
+
+        <!-- Main Content Area: Read-Only Statistics Dashboard -->
+        <main class="main-layout">
+            <section id="stats-ui-container"></section>
+        </main>
+
+        <!-- Notification Toast Container -->
+        <div id="notifications-container" class="notifications-container"></div>
+    </div>
+
+    <!-- ES Module Entry Script for Statistics Page -->
+    <script type="module" src="../js/statsMain.js"></script>
+</body>
+</html>

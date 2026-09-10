@@ -1,0 +1,98 @@
+/* ==========================================================================
+   MENU & NAVIGATION STYLES - BLACK & WHITE THEME
+   Location: /css/menu.css
+   Purpose: Styles for header navigation, action menu buttons, and the 
+            "⬅ Back to Main Menu" return button displayed on child pages.
+   ========================================================================== */
+
+/* Navigation Header Wrapper */
+.nav-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    list-style: none;
+    flex-wrap: wrap;
+}
+
+/* Sub-page "⬅ Back to Main Menu" Return Button Wrapper */
+.nav-back-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+/* Generic Nav Item / Return Button Styling */
+.nav-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.75rem 1.4rem;
+    border-radius: var(--btn-radius);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-muted);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    cursor: pointer;
+    backdrop-filter: blur(12px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Navigation Icon Component */
+.nav-icon {
+    font-size: 1.15rem;
+    opacity: 0.85;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Hover State Effects */
+.nav-item:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.25);
+}
+
+.nav-item:hover .nav-icon {
+    opacity: 1;
+    transform: scale(1.2) rotate(6deg);
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+}
+
+/* Active Page State */
+.nav-item.active {
+    color: #000000;
+    background: #ffffff;
+    border-color: #ffffff;
+    font-weight: 800;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.7);
+}
+
+.nav-item.active .nav-icon {
+    color: #000000;
+    opacity: 1;
+}
+
+/* Dedicated "⬅ Back to Main Menu" Return Button Styling */
+.nav-back-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+}
+
+.nav-back-btn:hover {
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+}
+
+.nav-back-btn:hover .nav-icon {
+    transform: translateX(-4px) scale(1.2);
+}

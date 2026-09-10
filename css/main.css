@@ -1,0 +1,275 @@
+/* Core Design System & Global Styles - Black & White Theme */
+:root {
+    --font-primary: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    
+    /* Pure Monochrome Palette */
+    --bg-dark: #050505;
+    --bg-card: rgba(18, 18, 18, 0.85);
+    --bg-card-hover: rgba(35, 35, 35, 0.95);
+    --border-color: rgba(255, 255, 255, 0.18);
+    
+    --primary-color: #ffffff;
+    --primary-hover: #e4e4e4;
+    --accent-color: #ffffff;
+    --success-color: #ffffff;
+    --warning-color: #d4d4d8;
+    
+    --text-main: #ffffff;
+    --text-muted: #8e8e93;
+    
+    /* Glassmorphism & Glow Effects */
+    --glass-backdrop: blur(16px);
+    --card-radius: 16px;
+    --btn-radius: 12px;
+    --shadow-glow: 0 0 25px rgba(255, 255, 255, 0.3);
+    --spark-glow: 0 0 15px rgba(255, 255, 255, 0.9), 0 0 30px rgba(255, 255, 255, 0.6), 0 0 50px rgba(255, 255, 255, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+input, textarea {
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Background Particle & Sparkle Overlay */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.7), rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 90px 40px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 160px 120px, rgba(255,255,255,0.9), rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 230px 190px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 310px 80px, rgba(255,255,255,0.8), rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 350px 350px;
+    opacity: 0.25;
+    animation: particleFloat 40s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Floating Click Symbols Background Layer */
+body::after {
+    content: '👆  ✦  ☝  ✨  ✦  👆';
+    position: fixed;
+    top: -5%;
+    left: 0;
+    width: 100%;
+    height: 110%;
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.03);
+    letter-spacing: 15vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    pointer-events: none;
+    z-index: 0;
+    animation: clickSymbolShift 25s ease-in-out infinite alternate;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+    animation: pageFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    will-change: opacity, transform;
+}
+
+#app.page-exit {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.995);
+    transition: opacity 0.18s cubic-bezier(0.4, 0, 1, 1), transform 0.18s cubic-bezier(0.4, 0, 1, 1);
+    pointer-events: none;
+}
+
+@keyframes pageFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.992);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Centered Header & Top Bar */
+.top-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    padding: 2.5rem 1.5rem 1.75rem;
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: var(--glass-backdrop);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+    position: relative;
+}
+
+.logo-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.85rem;
+    text-align: center;
+}
+
+/* Minimalist AI Generated Logo */
+.game-logo-img {
+    width: 84px;
+    height: 84px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.35);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    filter: contrast(1.1) brightness(1.05);
+}
+
+.game-logo-img:hover {
+    transform: scale(1.08) rotate(3deg);
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.6);
+}
+
+/* Centered Game Name with Spark & Clicking Symbols */
+.logo {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-shadow: var(--spark-glow);
+    position: relative;
+    display: inline-block;
+    padding: 0 2.5rem;
+    animation: sparkPulse 3s infinite ease-in-out;
+}
+
+/* Left Clicking Symbol Spark */
+.logo::before {
+    content: '☝';
+    position: absolute;
+    left: -0.5rem;
+    top: 50%;
+    transform: translateY(-50%) rotate(-15deg);
+    font-size: 1.8rem;
+    color: #ffffff;
+    opacity: 0.9;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+    animation: clickSparkLeft 2s ease-in-out infinite alternate;
+}
+
+/* Right Clicking Symbol Spark */
+.logo::after {
+    content: '✦';
+    position: absolute;
+    right: -0.5rem;
+    top: 45%;
+    transform: translateY(-50%) scale(1.1);
+    font-size: 1.6rem;
+    color: #ffffff;
+    opacity: 0.9;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+    animation: clickSparkRight 2s ease-in-out infinite alternate;
+}
+
+.main-layout {
+    flex: 1;
+    padding: 2.5rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Keyframe Animations */
+@keyframes particleFloat {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 350px 700px;
+    }
+}
+
+@keyframes clickSymbolShift {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        transform: translateY(20px) scale(1.05);
+    }
+}
+
+@keyframes sparkPulse {
+    0%, 100% {
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 0 30px rgba(255, 255, 255, 0.5), 0 0 45px rgba(255, 255, 255, 0.2);
+    }
+    50% {
+        text-shadow: 0 0 25px rgba(255, 255, 255, 1), 0 0 45px rgba(255, 255, 255, 0.8), 0 0 70px rgba(255, 255, 255, 0.5);
+    }
+}
+
+@keyframes clickSparkLeft {
+    0% {
+        transform: translateY(-50%) rotate(-15deg) scale(0.95);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(-60%) rotate(-5deg) scale(1.15);
+        opacity: 1;
+    }
+}
+
+@keyframes clickSparkRight {
+    0% {
+        transform: translateY(-50%) rotate(0deg) scale(0.9);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(-40%) rotate(15deg) scale(1.2);
+        opacity: 1;
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 640px) {
+    .logo {
+        font-size: 2rem;
+        letter-spacing: 2px;
+        padding: 0 1.75rem;
+    }
+    .game-logo-img {
+        width: 64px;
+        height: 64px;
+    }
+}
