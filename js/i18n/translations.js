@@ -176,6 +176,8 @@ export const TRANSLATIONS = {
         soundDesc: "Enable audio feedback on clicks and rebirths.",
         particlesLabel: "Particle & Spark FX",
         particlesDesc: "Toggle background particle sparkle animations.",
+        lowGraphicsLabel: "Low Graphics Mode",
+        lowGraphicsDesc: "Disable animations, glow effects, text shadows, and blur filters for maximum performance.",
         languageLabel: "Language / Ngôn ngữ",
         languageDesc: "Select your preferred display language.",
         
@@ -381,6 +383,8 @@ export const TRANSLATIONS = {
         soundDesc: "Bật/Tắt âm thanh khi bấm nút và tái sinh.",
         particlesLabel: "Hiệu ứng Hạt & Lấp lánh",
         particlesDesc: "Bật/Tắt hiệu ứng hạt phông nền.",
+        lowGraphicsLabel: "Chế độ Đồ họa Thấp",
+        lowGraphicsDesc: "Tắt hoạt ảnh, hiệu ứng phát sáng, bóng chữ và bộ lọc nền để đạt hiệu năng tối đa.",
         languageLabel: "Ngôn ngữ / Language",
         languageDesc: "Chọn ngôn ngữ hiển thị ưa thích.",
 

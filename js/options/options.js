@@ -19,6 +19,7 @@ const OPTIONS_KEY = 'forever_incremental_options';
 export const DEFAULT_OPTIONS = {
     soundEnabled: true,       // Audio click sound effects toggle
     particlesEnabled: true,   // Background particle sparkle FX toggle
+    lowGraphicsMode: false,   // Low graphics mode (disables animations & heavy effects for performance)
     autoSaveEnabled: true,    // Automatic background save toggle
     autoSaveInterval: 10000,  // Auto-save interval in milliseconds (10s)
     bgmTrack: 'track1',       // Active BGM soundtrack ('off' | 'track1' | 'track2' | 'track3')
@@ -77,10 +78,18 @@ class OptionsManager {
      * Apply visual settings and trigger BGM update
      */
     applySettings() {
+        if (!document.body) return;
+
         if (this.options.particlesEnabled) {
             document.body.classList.remove('no-particles');
         } else {
             document.body.classList.add('no-particles');
+        }
+
+        if (this.options.lowGraphicsMode) {
+            document.body.classList.add('low-graphics');
+        } else {
+            document.body.classList.remove('low-graphics');
         }
 
         // Update background music track playback

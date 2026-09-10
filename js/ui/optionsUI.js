@@ -48,6 +48,7 @@ export function renderOptionsUI(containerId) {
     const shortFormatOn = optionsManager.get('shortNumberFormat') !== false;
     const soundOn = optionsManager.get('soundEnabled');
     const particlesOn = optionsManager.get('particlesEnabled');
+    const lowGraphicsOn = !!optionsManager.get('lowGraphicsMode');
     const currentBGM = optionsManager.get('bgmTrack') || 'track1';
     const currentLang = getLanguage();
 
@@ -130,6 +131,18 @@ export function renderOptionsUI(containerId) {
                 </div>
                 <label class="switch">
                     <input type="checkbox" id="toggle-particles" ${particlesOn ? 'checked' : ''}>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <!-- Low Graphics Mode Setting Row -->
+            <div class="option-row">
+                <div class="option-info">
+                    <strong>⚡ ${t('lowGraphicsLabel')}</strong>
+                    <p class="option-desc">${t('lowGraphicsDesc')}</p>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="toggle-lowgraphics" ${lowGraphicsOn ? 'checked' : ''}>
                     <span class="slider"></span>
                 </label>
             </div>
@@ -303,6 +316,15 @@ export function renderOptionsUI(containerId) {
         particlesToggle.addEventListener('change', (e) => {
             optionsManager.set('particlesEnabled', e.target.checked);
             showNotification(`Particle FX ${e.target.checked ? 'enabled' : 'disabled'}`);
+        });
+    }
+
+    // 6b. Low Graphics Mode Toggle Handler
+    const lowGraphicsToggle = document.getElementById('toggle-lowgraphics');
+    if (lowGraphicsToggle) {
+        lowGraphicsToggle.addEventListener('change', (e) => {
+            optionsManager.set('lowGraphicsMode', e.target.checked);
+            showNotification(`Low Graphics Mode ${e.target.checked ? 'ENABLED' : 'DISABLED'}`);
         });
     }
 

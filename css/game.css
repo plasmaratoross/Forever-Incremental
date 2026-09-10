@@ -1981,3 +1981,54 @@ input:checked+.slider:before {
     border: 1px solid rgba(255, 255, 255, 0.1);
     letter-spacing: 0.5px;
 }
+
+/* ============================================================================
+ * LOW GRAPHICS MODE & GAME GRAPHIC OPTIMIZATIONS
+ * ============================================================================
+ */
+body.low-graphics .cosmic-banner,
+body.low-graphics .cosmic-event-banner,
+body.low-graphics .tier-frame-sapphire,
+body.low-graphics .badge-icon-frame.aura-glint,
+body.low-graphics .buy-mode-btn.buy-mode-active {
+    animation: none !important;
+    box-shadow: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+}
+
+body.low-graphics .game-modal-overlay,
+body.low-graphics .modal-backdrop {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(0, 0, 0, 0.85) !important;
+}
+
+body.low-graphics .game-modal,
+body.low-graphics .rebirth-portal-modal,
+body.low-graphics .upgrade-card,
+body.low-graphics .generator-card,
+body.low-graphics .badge-card,
+body.low-graphics .achievement-card {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    background: #141419 !important;
+}
+
+body.low-graphics .click-btn.primary-action-btn,
+body.low-graphics .click-btn.click-btn {
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+body.low-graphics .currency-amount {
+    text-shadow: none !important;
+}
+
+/* Hardware acceleration for game containers */
+.game-container,
+.upgrade-card,
+.generator-card,
+.badge-card {
+    transform: translateZ(0);
+}
