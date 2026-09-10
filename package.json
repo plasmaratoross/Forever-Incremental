@@ -1,0 +1,16 @@
+{
+  "name": "forever-incremental",
+  "version": "0.1.0",
+  "description": "Modular incremental game with Black & White UI design",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "incremental",
+    "game",
+    "web-app"
+  ],
+  "author": "",
+  "license": "MIT"
+}

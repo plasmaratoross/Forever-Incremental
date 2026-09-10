@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!-- ====================================================================== -->
+<!-- MAIN MENU / LANDING PAGE (index.html)                                  -->
+<!-- Purpose: Root landing page displaying logo, sparkling title, main      -->
+<!--          menu action buttons (Play, Options, Data), and beginner guide.-->
+<!-- ====================================================================== -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forever Incremental - Main Menu</title>
+    <meta name="description" content="Welcome to Forever Incremental - An infinite idle clicker journey.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/game.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation Header & Title Banner -->
+        <header class="top-bar">
+            <div class="logo-group">
+                <img src="assets/images/logo.png" alt="Forever Incremental Logo" class="game-logo-img">
+                <h1 class="logo">Forever Incremental</h1>
+            </div>
+            <nav id="menu-container"></nav>
+        </header>
+
+        <!-- Main Content Layout Area -->
+        <main class="main-layout">
+            <section id="home-ui-container"></section>
+        </main>
+
+        <!-- Notification Toast Container -->
+        <div id="notifications-container" class="notifications-container"></div>
+    </div>
+
+    <!-- ES Module Main Menu Bootstrap Script -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
