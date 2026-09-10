@@ -113,6 +113,11 @@ export function renderGameUI(containerId) {
                             <span>🏅 ${t('badgesBtn')}</span>
                         </a>
 
+                        <!-- Gallery Button: Navigates to dedicated Gallery page -->
+                        <a href="gallery.html" class="click-btn secondary-btn gallery-nav-btn">
+                            <span>🖼️ ${t('galleryBtn')}</span>
+                        </a>
+
                         <!-- Statistics Button: Navigates to dedicated Statistics page -->
                         <a href="stats.html" class="click-btn secondary-btn stats-nav-btn">
                             <span>📊 ${t('statsBtn')}</span>
@@ -158,6 +163,20 @@ export function renderGameUI(containerId) {
         const achievementNavBtn = container.querySelector('.achievement-nav-btn');
         if (achievementNavBtn) {
             achievementNavBtn.addEventListener('click', () => {
+                saveGame();
+            });
+        }
+
+        const badgeNavBtn = container.querySelector('.badge-nav-btn');
+        if (badgeNavBtn) {
+            badgeNavBtn.addEventListener('click', () => {
+                saveGame();
+            });
+        }
+
+        const galleryNavBtn = container.querySelector('.gallery-nav-btn');
+        if (galleryNavBtn) {
+            galleryNavBtn.addEventListener('click', () => {
                 saveGame();
             });
         }
@@ -286,13 +305,14 @@ export function renderGameUI(containerId) {
                 const isCurrentActive = existingBanner && !existingBanner.classList.contains('stabilized');
 
                 if (!existingBanner || (activeEvent && !isCurrentActive) || (!activeEvent && isCurrentActive)) {
+                    const evtTitle = activeEvent ? t(`event_${activeEvent.def.id}_name`, activeEvent.def.name) : '';
                     cosmicContainer.innerHTML = `
                         <div class="cosmic-event-banner ${activeEvent ? activeEvent.def.themeClass : 'stabilized'}">
                             ${activeEvent ? `
                                 <div class="cosmic-banner-content">
                                     <div class="cosmic-banner-top">
                                         <span class="cosmic-rarity-tag ${activeEvent.def.rarity.toLowerCase().replace(/\s+/g, '-')}">${activeEvent.def.rarity}</span>
-                                        <span class="cosmic-event-title">⚡ ${activeEvent.def.name}</span>
+                                        <span class="cosmic-event-title">⚡ ${evtTitle}</span>
                                         <span class="cosmic-event-timer">⏱️ ${activeSec}s</span>
                                     </div>
                                     <div class="cosmic-event-buffs">

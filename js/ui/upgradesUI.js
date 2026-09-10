@@ -49,15 +49,15 @@ export function renderUpgradesUI(containerId) {
                 <!-- Currency & Stat Summary HUD -->
                 <div class="upgrades-hud">
                     <div class="hud-stat">
-                        <span class="hud-label">Current Balance:</span>
+                        <span class="hud-label">${t('currentBalanceLabel')}</span>
                         <span class="hud-value currency-value">${formatNumber(state.currency)} Points</span>
                     </div>
                     <div class="hud-stat">
-                        <span class="hud-label">Est. Click Power:</span>
+                        <span class="hud-label">${t('estClickPowerLabel')}</span>
                         <span class="hud-value power-value">+${formatNumber(calcResult.amount)}</span>
                     </div>
                     <div class="hud-stat">
-                        <span class="hud-label">Mastery Progress:</span>
+                        <span class="hud-label">${t('masteryProgressLabel')}</span>
                         <span class="hud-value mastery-value ${purchasedCount >= targetRequired ? 'complete' : ''}">${purchasedCount} / ${targetRequired}</span>
                     </div>
                 </div>
@@ -74,31 +74,33 @@ export function renderUpgradesUI(containerId) {
             const actualCost = getUpgradeCost(upgrade, state);
             const canAfford = state.currency >= actualCost;
             const itemNumber = index + 1;
+            const upgName = t(`upgrade_${upgrade.id}_name`, upgrade.name);
+            const upgDesc = t(`upgrade_${upgrade.id}_desc`, upgrade.description);
 
             html += `
                 <div class="upgrade-item-card ${isPurchased ? 'purchased' : (canAfford ? 'affordable' : 'locked')}">
                     <div class="upgrade-item-header">
                         <span class="upgrade-item-num">#${itemNumber}</span>
-                        <h3 class="upgrade-item-name">${upgrade.name}</h3>
+                        <h3 class="upgrade-item-name">${upgName}</h3>
                     </div>
 
-                    <p class="upgrade-item-desc">${upgrade.description}</p>
+                    <p class="upgrade-item-desc">${upgDesc}</p>
 
                     <div class="upgrade-item-footer">
                         <div class="upgrade-cost-tag">
-                            <span class="cost-label">Cost:</span>
+                            <span class="cost-label">${t('costLabel')}:</span>
                             <span class="cost-value">${formatNumber(actualCost)} Points</span>
                         </div>
 
                         ${isPurchased ? `
                             <button class="click-btn secondary-btn buy-upgrade-btn" disabled>
-                                ✓ PURCHASED
+                                ${t('purchasedBtn')}
                             </button>
                         ` : `
                             <button class="click-btn buy-upgrade-btn ${canAfford ? '' : 'secondary-btn'}" 
                                     data-upgrade-id="${upgrade.id}" 
                                     ${canAfford ? '' : 'disabled'}>
-                                ${canAfford ? 'BUY' : 'LOCKED'}
+                                ${canAfford ? t('buyBtn') : t('btnLocked')}
                             </button>
                         `}
                     </div>
@@ -128,31 +130,33 @@ export function renderUpgradesUI(containerId) {
                 const actualCost = getUpgradeCost(upgrade, state);
                 const canAfford = state.currency >= actualCost;
                 const itemNumber = index + 11;
+                const upgName = t(`upgrade_${upgrade.id}_name`, upgrade.name);
+                const upgDesc = t(`upgrade_${upgrade.id}_desc`, upgrade.description);
 
                 html += `
                     <div class="upgrade-item-card advanced-card ${isPurchased ? 'purchased' : (canAfford ? 'affordable' : 'locked')}">
                         <div class="upgrade-item-header">
                             <span class="upgrade-item-num advanced-num">#${itemNumber}</span>
-                            <h3 class="upgrade-item-name">${upgrade.name}</h3>
+                            <h3 class="upgrade-item-name">${upgName}</h3>
                         </div>
 
-                        <p class="upgrade-item-desc">${upgrade.description}</p>
+                        <p class="upgrade-item-desc">${upgDesc}</p>
 
                         <div class="upgrade-item-footer">
                             <div class="upgrade-cost-tag">
-                                <span class="cost-label">Cost:</span>
+                                <span class="cost-label">${t('costLabel')}:</span>
                                 <span class="cost-value highlight-gold">${formatNumber(actualCost)} Points</span>
                             </div>
 
                             ${isPurchased ? `
                                 <button class="click-btn secondary-btn buy-upgrade-btn" disabled>
-                                    ✓ PURCHASED
+                                    ${t('purchasedBtn')}
                                 </button>
                             ` : `
                                 <button class="click-btn buy-upgrade-btn ${canAfford ? '' : 'secondary-btn'}" 
                                         data-upgrade-id="${upgrade.id}" 
                                         ${canAfford ? '' : 'disabled'}>
-                                    ${canAfford ? 'BUY' : 'LOCKED'}
+                                    ${canAfford ? t('buyBtn') : t('btnLocked')}
                                 </button>
                             `}
                         </div>
@@ -182,31 +186,33 @@ export function renderUpgradesUI(containerId) {
                 const actualCost = getUpgradeCost(upgrade, state);
                 const canAfford = state.currency >= actualCost;
                 const itemNumber = index + 14;
+                const upgName = t(`upgrade_${upgrade.id}_name`, upgrade.name);
+                const upgDesc = t(`upgrade_${upgrade.id}_desc`, upgrade.description);
 
                 html += `
                     <div class="upgrade-item-card cosmic-card ${isPurchased ? 'purchased' : (canAfford ? 'affordable' : 'locked')}">
                         <div class="upgrade-item-header">
                             <span class="upgrade-item-num cosmic-num">#${itemNumber}</span>
-                            <h3 class="upgrade-item-name">${upgrade.name}</h3>
+                            <h3 class="upgrade-item-name">${upgName}</h3>
                         </div>
 
-                        <p class="upgrade-item-desc">${upgrade.description}</p>
+                        <p class="upgrade-item-desc">${upgDesc}</p>
 
                         <div class="upgrade-item-footer">
                             <div class="upgrade-cost-tag">
-                                <span class="cost-label">Cost:</span>
+                                <span class="cost-label">${t('costLabel')}:</span>
                                 <span class="cost-value highlight-gold">${formatNumber(actualCost)} Points</span>
                             </div>
 
                             ${isPurchased ? `
                                 <button class="click-btn secondary-btn buy-upgrade-btn" disabled>
-                                    ✓ PURCHASED
+                                    ${t('purchasedBtn')}
                                 </button>
                             ` : `
                                 <button class="click-btn buy-upgrade-btn ${canAfford ? 'primary-action-btn' : 'secondary-btn'}" 
                                         data-upgrade-id="${upgrade.id}" 
                                         ${canAfford ? '' : 'disabled'}>
-                                    ${canAfford ? 'BUY' : 'LOCKED'}
+                                    ${canAfford ? t('buyBtn') : t('btnLocked')}
                                 </button>
                             `}
                         </div>
@@ -236,31 +242,33 @@ export function renderUpgradesUI(containerId) {
                 const actualCost = getUpgradeCost(upgrade, state);
                 const canAfford = state.currency >= actualCost;
                 const itemNumber = index + 21;
+                const upgName = t(`upgrade_${upgrade.id}_name`, upgrade.name);
+                const upgDesc = t(`upgrade_${upgrade.id}_desc`, upgrade.description);
 
                 html += `
                     <div class="upgrade-item-card transcendent-card ${isPurchased ? 'purchased' : (canAfford ? 'affordable' : 'locked')}">
                         <div class="upgrade-item-header">
                             <span class="upgrade-item-num transcendent-num">#${itemNumber}</span>
-                            <h3 class="upgrade-item-name">${upgrade.name}</h3>
+                            <h3 class="upgrade-item-name">${upgName}</h3>
                         </div>
 
-                        <p class="upgrade-item-desc">${upgrade.description}</p>
+                        <p class="upgrade-item-desc">${upgDesc}</p>
 
                         <div class="upgrade-item-footer">
                             <div class="upgrade-cost-tag">
-                                <span class="cost-label">Cost:</span>
+                                <span class="cost-label">${t('costLabel')}:</span>
                                 <span class="cost-value highlight-gold">${formatNumber(actualCost)} Points</span>
                             </div>
 
                             ${isPurchased ? `
                                 <button class="click-btn secondary-btn buy-upgrade-btn" disabled>
-                                    ✓ PURCHASED
+                                    ${t('purchasedBtn')}
                                 </button>
                             ` : `
                                 <button class="click-btn buy-upgrade-btn ${canAfford ? 'primary-action-btn' : 'secondary-btn'}" 
                                         data-upgrade-id="${upgrade.id}" 
                                         ${canAfford ? '' : 'disabled'}>
-                                    ${canAfford ? 'BUY' : 'LOCKED'}
+                                    ${canAfford ? t('buyBtn') : t('btnLocked')}
                                 </button>
                             `}
                         </div>

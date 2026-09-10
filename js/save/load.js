@@ -9,6 +9,8 @@
  */
 
 import { stateManager } from '../core/state.js';
+import { calculateAndApplyOfflineProgress } from '../systems/offlineProgress.js';
+import { checkAndShowOfflineModal } from '../ui/offlineModal.js';
 
 const SAVE_KEY = 'forever_incremental_save';
 
@@ -70,6 +72,7 @@ export function loadGame() {
             autoclickUnlocked: (rebirthCount >= 3 || parsedState.autoclickUnlocked || false),
             autoclickEnabled: parsedState.autoclickEnabled || false,
             cosmicEventsUnlocked: (rebirthCount >= 3 || parsedState.cosmicEventsUnlocked || false),
+            cosmicEventState: parsedState.cosmicEventState || null,
             rebirthUpgrades: {
                 efficient_instinct: isEfficientInstinctActive,
                 ...(parsedState.rebirthUpgrades || {})
@@ -93,8 +96,21 @@ export function loadGame() {
             }
         };
 
+        // Process and apply offline progress gains (max 24 hours) from Generators and Autoclicker
+        calculateAndApplyOfflineProgress(safeState);
+
         stateManager.setState(safeState);
         console.log('Game Progress Loaded Successfully.');
+
+        // Trigger Offline Progress Modal popup if offline gains occurred
+        if (typeof document !== 'undefined') {
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => checkAndShowOfflineModal());
+            } else {
+                setTimeout(checkAndShowOfflineModal, 150);
+            }
+        }
+
         return true;
     } catch (err) {
         console.error('Failed to load game state from storage:', err);

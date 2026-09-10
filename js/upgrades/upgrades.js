@@ -14,6 +14,7 @@ import { saveGame } from '../save/save.js';
 import { getRebirthDifficultyMultiplier } from '../systems/rebirth.js';
 import { getCurrentEventClickPowerMult } from '../systems/cosmicEvents.js';
 import { getAchievementBonus } from '../systems/achievements.js';
+import { getBadgeUpgradeClickMult } from '../systems/badgeUpgrades.js';
 
 /**
  * Calculate actual dynamic cost of an upgrade based on player's Rebirth difficulty multiplier and permanent upgrades
@@ -515,12 +516,15 @@ export function calculateClickReward(state, isManualClick = false) {
         cosmicClickMult = 1 + ((cosmicClickMult - 1) * 1.50);
     }
 
-    // Layer 6f: Efficient Instinct Rebirth 2 Perk Bonus (+25% Click Power)
+    // Layer 6f: Efficient Instinct Permanent Rebirth Perk (+25% Click Power)
     const hasEfficientInstinct = (rebirthCount >= 2) || !!rebirthUpgrades.efficient_instinct;
-    const instinctClickMult = hasEfficientInstinct ? 1.25 : 1.00;
+    const instinctClickMult = hasEfficientInstinct ? 1.25 : 1.0;
 
-    // Combine core multipliers & Cosmic Events multiplier & Achievement bonus & Rebirth 2 Perk
-    let currentPower = flatTotal * clickMultiplier * rebirthMultiplier * momentumMultiplier * breakthroughMultiplier * causalMultiplier * dimensionalMultiplier * cosmicClickMult * clickerAchBonus * instinctClickMult;
+    // Layer 6g: Permanent Badge Upgrades Click Power Multiplier
+    const badgeUpgradeClickMult = 1 + getBadgeUpgradeClickMult(state);
+
+    // Combine core multipliers & Cosmic Events multiplier & Achievement bonus & Rebirth 2 Perk & Badge Upgrades
+    let currentPower = flatTotal * clickMultiplier * rebirthMultiplier * momentumMultiplier * breakthroughMultiplier * causalMultiplier * dimensionalMultiplier * cosmicClickMult * clickerAchBonus * instinctClickMult * badgeUpgradeClickMult;
 
     // Layer 7: Feedback Loop & Quantum Entanglement Passive Income Bonus
     if (purchased['feedback_loop']) {

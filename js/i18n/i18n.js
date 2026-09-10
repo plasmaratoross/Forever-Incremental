@@ -32,10 +32,15 @@ export function setLanguage(lang) {
 }
 
 /**
- * Translate key into current language string with fallback to English
+ * Translate key into current language string with fallback to English or optional fallback text
+ * @param {string} key - Dictionary translation key
+ * @param {string} [fallback] - Optional fallback text if key is missing
+ * @returns {string} Translated string
  */
-export function t(key) {
+export function t(key, fallback) {
     const lang = getLanguage();
     const dict = TRANSLATIONS[lang] || TRANSLATIONS.en;
-    return dict[key] || TRANSLATIONS.en[key] || key;
+    if (dict && dict[key] !== undefined) return dict[key];
+    if (TRANSLATIONS.en && TRANSLATIONS.en[key] !== undefined) return TRANSLATIONS.en[key];
+    return fallback !== undefined ? fallback : key;
 }

@@ -203,7 +203,7 @@ export function canRebirth(state) {
  * - Rebirth 1: Permanently unlocks Advanced Clicking System
  * - Rebirth 2: Permanently unlocks Efficient Instinct (-15% Upgrade Costs, +25% Click & Gen)
  * - Rebirth 3: Permanently unlocks Autoclick System (5 clicks/sec) & Cosmic Events System
- * - Rebirth 4: Permanently unlocks Cosmic Acceleration (120s cooldown), +9% Event Chance Boost, 2 New Events, 6 Transcendent Click Upgrades, and 7 Transcendent Generators (20 levels each)
+ * - Rebirth 4: Permanently unlocks Cosmic Acceleration (100s cooldown), +14% Event Chance Boost, 2 New Events, 6 Transcendent Click Upgrades, and 7 Transcendent Generators (20 levels each)
  * - Resets run currency & non-persistent upgrades
  * - Preserves Rebirth Count, Permanent Unlocks, Points, Generators, Cosmic Upgrades, and Lifetime stats
  */
@@ -257,7 +257,9 @@ export function performRebirth() {
             totalRebirths: (currentStats.totalRebirths || currentRebirthCount) + 1,
             highestRebirth: Math.max(currentStats.highestRebirth || currentRebirthCount, newRebirthCount)
         },
-        achievements: currentState.achievements || {}
+        achievements: currentState.achievements || {},
+        badges: currentState.badges || {},
+        badgeUpgrades: currentState.badgeUpgrades || {}
     });
 
     saveGame();

@@ -15,6 +15,7 @@ import { isSingularityActive } from '../upgrades/upgrades.js';
 import { showNotification } from '../ui/notifications.js';
 import { getCurrentEventPointGenMult } from './cosmicEvents.js';
 import { getAchievementBonus } from './achievements.js';
+import { getBadgeUpgradePointGenMult } from './badgeUpgrades.js';
 
 /**
  * Definitions for the 5 Point Generators (10 levels max per generator)
@@ -385,11 +386,9 @@ export function getTotalPointGeneration(state) {
 
     const rebirthMultiplier = currentState.rebirthMultiplier || 1;
     const burstMultiplier = isSingularityActive() ? 10 : 1;
-    const cosmicEventMultiplier = getCurrentEventPointGenMult();
-    const accumBonus = 1 + (getAchievementBonus(currentState, 'point_accumulator') / 100);
-    const velBonus = 1 + (getAchievementBonus(currentState, 'point_velocity') / 100);
+    const badgeUpgradePointGenMult = 1 + getBadgeUpgradePointGenMult(currentState);
 
-    return baseGen * rebirthMultiplier * burstMultiplier * cosmicEventMultiplier * accumBonus * velBonus * upgradeGenMult * instinctPointGenMult;
+    return baseGen * rebirthMultiplier * burstMultiplier * cosmicEventMultiplier * accumBonus * velBonus * upgradeGenMult * instinctPointGenMult * badgeUpgradePointGenMult;
 }
 
 /**

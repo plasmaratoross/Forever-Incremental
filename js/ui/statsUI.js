@@ -39,39 +39,39 @@ export function renderStatsUI(containerId) {
                         <a href="game.html" class="click-btn secondary-btn back-game-btn">
                             <span>◀ ${t('navPlay')}</span>
                         </a>
-                        <h2 class="stats-main-title">📊 STATISTICS & TELEMETRY</h2>
+                        <h2 class="stats-main-title">${t('statsDashboardTitle')}</h2>
                     </div>
                     <p class="stats-subtitle">
-                        Read-only telemetry dashboard tracking real-time status and lifetime progression milestones.
+                        ${t('statsDashboardTagline')}
                     </p>
                 </div>
 
                 <!-- Section 1: CURRENT STATUS -->
                 <div class="game-card stats-section-card">
-                    <h3 class="stats-section-title">⚡ CURRENT STATUS</h3>
+                    <h3 class="stats-section-title">${t('secCurrentStatus')}</h3>
                     <div class="stats-grid">
                         <div class="stat-item">
-                            <span class="stat-item-label">Current Rebirth:</span>
+                            <span class="stat-item-label">${t('statCurrentRebirth')}</span>
                             <span id="stat-val-rebirth" class="stat-item-val highlight-gold">0</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-item-label">Game Speed:</span>
+                            <span class="stat-item-label">${t('statGameSpeed')}</span>
                             <span id="stat-val-speed" class="stat-item-val">×1.00</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-item-label">Est. Click Power:</span>
+                            <span class="stat-item-label">${t('statEstClickPower')}</span>
                             <span id="stat-val-clickpower" class="stat-item-val">+1</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-item-label">Autoclick Output (CPS):</span>
+                            <span class="stat-item-label">${t('statAutoclickCPS')}</span>
                             <span id="stat-val-cps" class="stat-item-val">0.00 CPS</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-item-label">Current Points:</span>
+                            <span class="stat-item-label">${t('statCurrentPoints')}</span>
                             <span id="stat-val-points" class="stat-item-val">0</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-item-label">Current PPS:</span>
+                            <span class="stat-item-label">${t('statCurrentPPS')}</span>
                             <span id="stat-val-pps" class="stat-item-val">0/s</span>
                         </div>
                     </div>
@@ -79,38 +79,38 @@ export function renderStatsUI(containerId) {
 
                 <!-- Section 2: LIFETIME STATISTICS & RECORDS -->
                 <div class="game-card stats-section-card">
-                    <h3 class="stats-section-title">🏆 LIFETIME STATISTICS & RECORDS</h3>
+                    <h3 class="stats-section-title">${t('secLifetimeStats')}</h3>
                     <div class="stats-grid">
                         <div class="stat-item">
-                            <span class="stat-item-label">Total Playtime:</span>
+                            <span class="stat-item-label">${t('statPlaytime')}</span>
                             <span id="stat-val-playtime" class="stat-item-val">0s</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-item-label">Manual Clicks:</span>
+                            <span class="stat-item-label">${t('statManualClicks')}</span>
                             <span id="stat-val-manualclicks" class="stat-item-val">0</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-item-label">Total Clicks (All):</span>
+                            <span class="stat-item-label">${t('statTotalClicksAll')}</span>
                             <span id="stat-val-totalclicks" class="stat-item-val">0</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-item-label">Total Points Earned:</span>
+                            <span class="stat-item-label">${t('statTotalPointsEarned')}</span>
                             <span id="stat-val-totalearned" class="stat-item-val">0</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-item-label">Total Generator Points:</span>
+                            <span class="stat-item-label">${t('statTotalGenPoints')}</span>
                             <span id="stat-val-genebrned" class="stat-item-val">0</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-item-label">Highest PPS Reached:</span>
+                            <span class="stat-item-label">${t('statHighestPPS')}</span>
                             <span id="stat-val-highestpps" class="stat-item-val">0</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-item-label">Total Rebirths:</span>
+                            <span class="stat-item-label">${t('statTotalRebirths')}</span>
                             <span id="stat-val-totalrebirths" class="stat-item-val">0</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-item-label">Highest Rebirth Tier:</span>
+                            <span class="stat-item-label">${t('statHighestRebirthTier')}</span>
                             <span id="stat-val-highestrebirth" class="stat-item-val">0</span>
                         </div>
                     </div>
@@ -118,18 +118,18 @@ export function renderStatsUI(containerId) {
 
                 <!-- Section 3: PROGRESSION SUMMARY -->
                 <div class="game-card stats-section-card">
-                    <h3 class="stats-section-title">🎯 PROGRESSION SUMMARY</h3>
+                    <h3 class="stats-section-title">${t('secProgressionSummary')}</h3>
                     <div class="stats-grid">
                         <div class="stat-item">
-                            <span class="stat-item-label">Clicking Upgrades:</span>
+                            <span class="stat-item-label">${t('statProgUpgrades')}</span>
                             <span id="stat-val-prog-upgrades" class="stat-item-val">0 / 26</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-item-label">Generator Levels:</span>
+                            <span class="stat-item-label">${t('statProgGenerators')}</span>
                             <span id="stat-val-prog-gens" class="stat-item-val">0 / 265</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-item-label">Achievement Levels:</span>
+                            <span class="stat-item-label">${t('statProgAchievements')}</span>
                             <span id="stat-val-prog-achs" class="stat-item-val">0 / 120</span>
                         </div>
                     </div>
@@ -137,22 +137,22 @@ export function renderStatsUI(containerId) {
 
                 <!-- Section 4: COSMIC EVENTS TELEMETRY -->
                 <div class="game-card stats-section-card">
-                    <h3 class="stats-section-title">🌌 COSMIC EVENTS TELEMETRY</h3>
+                    <h3 class="stats-section-title">${t('secCosmicTelemetry')}</h3>
                     <div class="stats-grid">
                         <div class="stat-item">
-                            <span class="stat-item-label">Current Anomaly:</span>
-                            <span id="stat-val-event-name" class="stat-item-val highlight-gold">STABILIZED</span>
+                            <span class="stat-item-label">${t('statCurrentAnomaly')}</span>
+                            <span id="stat-val-event-name" class="stat-item-val highlight-gold">${t('cosmicStatusStabilized')}</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-item-label">Anomaly Timer Remaining:</span>
+                            <span class="stat-item-label">${t('statAnomalyTimer')}</span>
                             <span id="stat-val-event-timer" class="stat-item-val">—</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-item-label">Cosmic Events Activated:</span>
+                            <span class="stat-item-label">${t('statTotalEventsEncountered')}</span>
                             <span id="stat-val-events-activated" class="stat-item-val">0</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-item-label">Unique Events Discovered:</span>
+                            <span class="stat-item-label">${t('statDistinctEventsEncountered')}</span>
                             <span id="stat-val-events-discovered" class="stat-item-val">0 / 9</span>
                         </div>
                         <div class="stat-item">
@@ -274,9 +274,10 @@ export function renderStatsUI(containerId) {
         if (elEventTimer) {
             if (activeDef && cosmicEventRuntime.activeEvent) {
                 const remSec = Math.max(0, Math.ceil((cosmicEventRuntime.activeEvent.endTime - Date.now()) / 1000));
-                elEventTimer.textContent = `${remSec}s`;
+                elEventTimer.textContent = `${remSec}s (Active)`;
             } else {
-                elEventTimer.textContent = '—';
+                const nextRollSec = Math.max(0, Math.ceil((cosmicEventRuntime.nextRollTime - Date.now()) / 1000));
+                elEventTimer.textContent = `${nextRollSec}s (Cooldown)`;
             }
         }
 

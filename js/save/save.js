@@ -34,6 +34,7 @@ function isLocalStorageAvailable() {
  */
 export function saveGame() {
     try {
+        stateManager.setState({ lastSavedTimestamp: Date.now() });
         const state = stateManager.getState();
         const data = JSON.stringify(state);
 
@@ -49,6 +50,13 @@ export function saveGame() {
         console.error('Failed to save game state to web storage:', err);
         return false;
     }
+}
+
+// Automatically persist progress with current timestamp when leaving / closing page
+if (typeof window !== 'undefined') {
+    window.addEventListener('beforeunload', () => {
+        saveGame();
+    });
 }
 
 /**

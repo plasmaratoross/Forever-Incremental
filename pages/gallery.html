@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!-- ====================================================================== -->
+<!-- GALLERY WEBPAGE (pages/gallery.html)                                  -->
+<!-- Purpose: Cosmic Occasions Chance telemetry and probability breakdown  -->
+<!--          gallery for Forever Incremental.                              -->
+<!-- ====================================================================== -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Gallery - Forever Incremental</title>
+    <meta name="description" content="Inspect real-time Cosmic Occasion occurrence chances, active chance modifiers, and sequential roll mechanics in Forever Incremental.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/game.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation Header -->
+        <header class="top-bar">
+            <div class="logo-group">
+                <img src="../assets/images/logo.png" alt="Forever Incremental Logo" class="game-logo-img">
+                <h1 class="logo">Forever Incremental</h1>
+            </div>
+            <nav id="menu-container"></nav>
+        </header>
+
+        <!-- Main Content Area: Gallery Dashboard Container -->
+        <main class="main-layout">
+            <section id="gallery-ui-container"></section>
+        </main>
+
+        <!-- Notification Toast Container -->
+        <div id="notifications-container" class="notifications-container"></div>
+    </div>
+
+    <!-- ES Module Entry Script for Gallery Page -->
+    <script type="module" src="../js/galleryMain.js"></script>
+</body>
+</html>

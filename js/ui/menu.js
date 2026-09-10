@@ -24,25 +24,43 @@ export function renderMenu(containerId) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
+    // Determine page context
     const pathname = window.location.pathname.toLowerCase();
+    const isGamePage = pathname.endsWith('game.html') || pathname.includes('/game.html');
+    const isHomePage = pathname.endsWith('index.html') || pathname.endsWith('/') || (!pathname.includes('.html') && !pathname.includes('/pages/'));
     
-    // Check if we are currently on a child page inside /pages/ or sub-route
-    const isSubPage = pathname.includes('/pages/') || pathname.includes('game.html') || pathname.includes('upgrades.html') || pathname.includes('options.html') || pathname.includes('save.html');
-    const isHomePage = !isSubPage || pathname.endsWith('/index.html') || pathname.endsWith('/');
-
     if (isHomePage) {
-        // On Main Menu landing page: Keep top bar simple and clean (buttons are inside hero section)
+        // On Main Menu landing page: Keep top bar clean
         container.innerHTML = ``;
-    } else {
-        // On Child Page: Display "⬅ Back to Main Menu" return button
-        // Calculate relative path back to main menu index.html
+    } else if (isGamePage) {
+        // On Gameplay Zone page (game.html): Display "⬅ Back to Main Menu" button
         const homePath = pathname.includes('/pages/') ? '../index.html' : 'index.html';
 
         container.innerHTML = `
             <div class="nav-back-wrapper">
                 <a href="${homePath}" class="nav-item nav-back-btn" data-page="back">
                     <span class="nav-icon">⬅</span>
-                    <span>${t('navBack')}</span>
+                    <span>${t('navBackToMenu', 'Back to Main Menu')}</span>
+                </a>
+            </div>
+        `;
+
+        const backBtn = container.querySelector('.nav-back-btn');
+        if (backBtn) {
+            backBtn.addEventListener('click', () => {
+                saveGame();
+            });
+        }
+    } else {
+        // Inside gameplay sections (upgrades, generators, achievements, badges, gallery, stats, options, save):
+        // Display "⬅ Back to Gameplay Zone" button
+        const gamePath = pathname.includes('/pages/') ? 'game.html' : 'pages/game.html';
+
+        container.innerHTML = `
+            <div class="nav-back-wrapper">
+                <a href="${gamePath}" class="nav-item nav-back-btn" data-page="back">
+                    <span class="nav-icon">⬅</span>
+                    <span>${t('navBackToGame', 'Back to Gameplay Zone')}</span>
                 </a>
             </div>
         `;

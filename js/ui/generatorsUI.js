@@ -61,13 +61,18 @@ export function renderGeneratorsUI(containerId) {
             const isCosmic = def.tier === 'cosmic';
             const isLegendary = def.tier === 'legendary';
             const maxLevel = def.maxLevel || 10;
+            const genName = t(`gen_${def.id}_name`, def.name);
+            const genDesc = t(`gen_${def.id}_desc`, def.description);
+            const tierKey = `tier${def.tier.charAt(0).toUpperCase() + def.tier.slice(1)}`;
+            const tierText = t(tierKey, def.tier.toUpperCase());
+
             return `
                 <div class="upgrade-item-card generator-item-card ${isCosmic ? 'cosmic-card' : ''} ${isLegendary ? 'legendary-card' : ''} locked"
                      id="gen-card-${def.id}">
                     <div class="upgrade-item-header">
                         <div class="gen-title-group">
-                            <span class="status-badge tier-badge ${def.tier}-tier">${def.tier.toUpperCase()}</span>
-                            <h3 class="upgrade-item-name">${def.name}</h3>
+                            <span class="status-badge tier-badge ${def.tier}-tier">${tierText}</span>
+                            <h3 class="upgrade-item-name">${genName}</h3>
                             ${isLegendary ? `<span class="ultimate-tag">✨ ${t('ultimateBadge')}</span>` : ''}
                         </div>
                         <div id="gen-level-badge-${def.id}" class="gen-level-badge">
@@ -75,7 +80,7 @@ export function renderGeneratorsUI(containerId) {
                         </div>
                     </div>
 
-                    <p class="upgrade-item-desc">"${def.description}"</p>
+                    <p class="upgrade-item-desc">"${genDesc}"</p>
 
                     <div class="generator-stats-row">
                         <div class="gen-stat">

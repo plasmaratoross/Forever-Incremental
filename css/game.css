@@ -1120,51 +1120,78 @@ input:checked+.slider:before {
     box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
 }
 
-/* Theme classes applied to app root container */
-.event-theme-time-pulse {
-    border-color: rgba(59, 130, 246, 0.5);
-    box-shadow: 0 0 25px rgba(59, 130, 246, 0.3);
+/* Theme classes applied to body and app root container for game-wide visual effects */
+body.event-theme-time-pulse,
+#app.event-theme-time-pulse {
+    background: radial-gradient(circle at 50% 30%, rgba(30, 58, 138, 0.3) 0%, rgba(10, 10, 26, 0.98) 75%) !important;
+    border-color: rgba(59, 130, 246, 0.6) !important;
+    box-shadow: inset 0 0 50px rgba(59, 130, 246, 0.25), 0 0 35px rgba(59, 130, 246, 0.4) !important;
 }
 
-.event-theme-causal-shift {
-    border-color: rgba(34, 197, 94, 0.5);
-    box-shadow: 0 0 25px rgba(34, 197, 94, 0.3);
+body.event-theme-causal-shift,
+#app.event-theme-causal-shift {
+    background: radial-gradient(circle at 50% 30%, rgba(20, 83, 45, 0.35) 0%, rgba(10, 10, 26, 0.98) 75%) !important;
+    border-color: rgba(34, 197, 94, 0.6) !important;
+    box-shadow: inset 0 0 50px rgba(34, 197, 94, 0.25), 0 0 35px rgba(34, 197, 94, 0.4) !important;
 }
 
-.event-theme-paradox-loop {
-    border-color: rgba(168, 85, 247, 0.5);
-    box-shadow: 0 0 25px rgba(168, 85, 247, 0.3);
+body.event-theme-paradox-loop,
+#app.event-theme-paradox-loop {
+    background: radial-gradient(circle at 50% 30%, rgba(88, 28, 135, 0.4) 0%, rgba(10, 10, 26, 0.98) 75%) !important;
+    border-color: rgba(168, 85, 247, 0.6) !important;
+    box-shadow: inset 0 0 50px rgba(168, 85, 247, 0.3), 0 0 40px rgba(168, 85, 247, 0.45) !important;
 }
 
-.event-theme-time-collapse {
-    border-color: rgba(236, 72, 153, 0.5);
-    box-shadow: 0 0 30px rgba(236, 72, 153, 0.4);
+body.event-theme-time-collapse,
+#app.event-theme-time-collapse {
+    background: radial-gradient(circle at 50% 30%, rgba(131, 24, 67, 0.4) 0%, rgba(15, 7, 18, 0.98) 75%) !important;
+    border-color: rgba(236, 72, 153, 0.6) !important;
+    box-shadow: inset 0 0 60px rgba(236, 72, 153, 0.3), 0 0 45px rgba(236, 72, 153, 0.5) !important;
+    animation: timeCollapsePulse 2s infinite alternate !important;
 }
 
-.event-theme-reality-fracture {
-    border-color: rgba(245, 158, 11, 0.6);
-    box-shadow: 0 0 35px rgba(245, 158, 11, 0.4);
+body.event-theme-reality-fracture,
+#app.event-theme-reality-fracture {
+    background: radial-gradient(circle at 50% 30%, rgba(120, 53, 15, 0.45) 0%, rgba(20, 10, 5, 0.98) 75%) !important;
+    border-color: rgba(245, 158, 11, 0.7) !important;
+    box-shadow: inset 0 0 65px rgba(245, 158, 11, 0.35), 0 0 50px rgba(245, 158, 11, 0.55) !important;
+    animation: realityFractureGlow 1.8s infinite alternate !important;
 }
 
-.event-theme-null-paradox {
-    border-color: rgba(14, 165, 233, 0.7);
-    box-shadow: 0 0 40px rgba(14, 165, 233, 0.5);
+body.event-theme-null-paradox,
+#app.event-theme-null-paradox {
+    background: radial-gradient(circle at 50% 30%, rgba(12, 74, 110, 0.5) 0%, rgba(3, 12, 22, 0.98) 75%) !important;
+    border-color: rgba(14, 165, 233, 0.75) !important;
+    box-shadow: inset 0 0 70px rgba(14, 165, 233, 0.4), 0 0 55px rgba(14, 165, 233, 0.6) !important;
+    animation: nullVoidPulse 2.2s infinite alternate !important;
 }
 
-.event-theme-omniversal-break {
-    border-color: rgba(239, 68, 68, 0.9);
-    box-shadow: 0 0 50px rgba(239, 68, 68, 0.7);
-    animation: cosmicGlow 1.5s infinite alternate;
+body.event-theme-omniversal-break,
+#app.event-theme-omniversal-break {
+    background: radial-gradient(circle at 50% 30%, rgba(153, 27, 27, 0.55) 0%, rgba(20, 5, 5, 0.98) 75%) !important;
+    border-color: rgba(239, 68, 68, 0.9) !important;
+    box-shadow: inset 0 0 80px rgba(239, 68, 68, 0.45), 0 0 65px rgba(239, 68, 68, 0.75) !important;
+    animation: omniversalGlow 1.5s infinite alternate !important;
 }
 
-@keyframes cosmicGlow {
-    from {
-        box-shadow: 0 0 25px rgba(239, 68, 68, 0.5);
-    }
+@keyframes timeCollapsePulse {
+    0% { box-shadow: inset 0 0 40px rgba(236, 72, 153, 0.2), 0 0 30px rgba(236, 72, 153, 0.4); }
+    100% { box-shadow: inset 0 0 70px rgba(236, 72, 153, 0.45), 0 0 55px rgba(236, 72, 153, 0.65); }
+}
 
-    to {
-        box-shadow: 0 0 60px rgba(250, 204, 21, 0.8);
-    }
+@keyframes realityFractureGlow {
+    0% { box-shadow: inset 0 0 40px rgba(245, 158, 11, 0.25), 0 0 35px rgba(245, 158, 11, 0.45); }
+    100% { box-shadow: inset 0 0 75px rgba(245, 158, 11, 0.5), 0 0 60px rgba(245, 158, 11, 0.75); }
+}
+
+@keyframes nullVoidPulse {
+    0% { box-shadow: inset 0 0 45px rgba(14, 165, 233, 0.3), 0 0 40px rgba(14, 165, 233, 0.5); }
+    100% { box-shadow: inset 0 0 85px rgba(14, 165, 233, 0.55), 0 0 65px rgba(14, 165, 233, 0.8); }
+}
+
+@keyframes omniversalGlow {
+    0% { box-shadow: inset 0 0 50px rgba(239, 68, 68, 0.35), 0 0 45px rgba(239, 68, 68, 0.55); }
+    100% { box-shadow: inset 0 0 95px rgba(250, 204, 21, 0.6), 0 0 75px rgba(239, 68, 68, 0.85); }
 }
 
 /* Achievements Page & Card Layout */
@@ -1703,12 +1730,30 @@ input:checked+.slider:before {
 }
 
 /* Rebirth 4 Cosmic Event Themes */
-.event-theme-solitary-star {
-    background: radial-gradient(circle at center, rgba(255, 230, 100, 0.15) 0%, rgba(10, 10, 25, 0.95) 70%) !important;
+body.event-theme-solitary-star,
+#app.event-theme-solitary-star {
+    background: radial-gradient(circle at 50% 30%, rgba(234, 179, 8, 0.4) 0%, rgba(15, 12, 5, 0.98) 75%) !important;
+    border-color: rgba(234, 179, 8, 0.85) !important;
+    box-shadow: inset 0 0 85px rgba(234, 179, 8, 0.4), 0 0 70px rgba(234, 179, 8, 0.7) !important;
+    animation: solitaryStarGlow 2s infinite alternate !important;
 }
 
-.event-theme-supernova {
-    background: radial-gradient(circle at center, rgba(255, 100, 50, 0.25) 0%, rgba(30, 5, 15, 0.95) 70%) !important;
+body.event-theme-supernova,
+#app.event-theme-supernova {
+    background: radial-gradient(circle at 50% 30%, rgba(225, 29, 72, 0.5) 0%, rgba(30, 5, 10, 0.98) 75%) !important;
+    border-color: rgba(225, 29, 72, 0.95) !important;
+    box-shadow: inset 0 0 100px rgba(225, 29, 72, 0.5), 0 0 80px rgba(245, 158, 11, 0.8) !important;
+    animation: supernovaPulse 1.2s infinite alternate !important;
+}
+
+@keyframes solitaryStarGlow {
+    0% { box-shadow: inset 0 0 50px rgba(234, 179, 8, 0.3), 0 0 45px rgba(234, 179, 8, 0.5); }
+    100% { box-shadow: inset 0 0 95px rgba(253, 224, 71, 0.6), 0 0 75px rgba(234, 179, 8, 0.8); }
+}
+
+@keyframes supernovaPulse {
+    0% { box-shadow: inset 0 0 60px rgba(225, 29, 72, 0.35), 0 0 55px rgba(245, 158, 11, 0.6); }
+    100% { box-shadow: inset 0 0 115px rgba(245, 158, 11, 0.7), 0 0 95px rgba(225, 29, 72, 0.9); }
 }
 
 .cosmic-rarity-tag.transcendent {
@@ -1723,8 +1768,13 @@ input:checked+.slider:before {
 }
 
 @keyframes apexPulse {
-    0% { box-shadow: 0 0 8px rgba(255, 123, 0, 0.5); }
-    100% { box-shadow: 0 0 20px rgba(255, 72, 0, 0.9); }
+    0% {
+        box-shadow: 0 0 8px rgba(255, 123, 0, 0.5);
+    }
+
+    100% {
+        box-shadow: 0 0 20px rgba(255, 72, 0, 0.9);
+    }
 }
 
 /* ============================================================================
@@ -1875,10 +1925,12 @@ input:checked+.slider:before {
         box-shadow: 0 0 10px var(--aura-color, #ffffff)44, inset 0 0 10px var(--aura-color, #ffffff)22;
         border-color: var(--aura-color, #ffffff);
     }
+
     50% {
         box-shadow: 0 0 25px var(--aura-color, #ffffff)aa, inset 0 0 20px var(--aura-color, #ffffff)66;
         border-color: #ffffff;
     }
+
     100% {
         box-shadow: 0 0 15px var(--aura-color, #ffffff)55, inset 0 0 12px var(--aura-color, #ffffff)33;
         border-color: var(--aura-color, #ffffff);
@@ -2029,6 +2081,995 @@ body.low-graphics .currency-amount {
 .game-container,
 .upgrade-card,
 .generator-card,
-.badge-card {
+.badge-card,
+.badge-upgrade-card {
     transform: translateZ(0);
+}
+
+/* ============================================================================
+ * BADGE UPGRADES SYSTEM STYLES
+ * ============================================================================
+ */
+.badge-upgrades-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-top: 1rem;
+}
+
+.badge-upgrade-card {
+    background: rgba(20, 20, 30, 0.7);
+    border: 1px solid rgba(255, 215, 0, 0.25);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.badge-upgrade-card.purchased {
+    border-color: rgba(74, 222, 128, 0.4);
+    background: rgba(15, 30, 20, 0.5);
+}
+
+.badge-upgrade-card.affordable:not(.purchased) {
+    border-color: rgba(255, 215, 0, 0.6);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);
+}
+
+.badge-upgrade-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.badge-upgrade-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #ffd700;
+    margin: 0;
+}
+
+.badge-upgrade-badge-tag {
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 0.25rem 0.6rem;
+    border-radius: 12px;
+    background: rgba(255, 215, 0, 0.15);
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    color: #ffd700;
+}
+
+.badge-upgrade-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted, rgba(255, 255, 255, 0.75));
+    margin-bottom: 0.85rem;
+    line-height: 1.4;
+}
+
+.badge-req-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.badge-req-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.badge-req-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.badge-req-tag {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.badge-req-tag.unlocked {
+    background: rgba(34, 197, 94, 0.15);
+    border: 1px solid rgba(34, 197, 94, 0.4);
+    color: #4ade80;
+}
+
+.badge-req-tag.locked {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #f87171;
+}
+
+.badge-upgrade-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.badge-upgrade-cost {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #f59e0b;
+}
+
+body.low-graphics .badge-upgrade-card {
+    box-shadow: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    background: #141419 !important;
+}
+
+/* ============================================================================
+ * COSMIC GALLERY & CHANCE DETAILS STYLES
+ * ============================================================================
+ */
+.cosmic-chance-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+}
+
+.cosmic-chance-card {
+    background: rgba(20, 20, 32, 0.75);
+    border: 1px solid rgba(147, 51, 234, 0.3);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+.cosmic-chance-card:hover {
+    border-color: rgba(168, 85, 247, 0.6);
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
+    transform: translateY(-2px);
+}
+
+.cosmic-chance-card.locked {
+    opacity: 0.65;
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.chance-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.chance-event-name {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #c084fc;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.chance-event-desc {
+    font-size: 0.88rem;
+    color: var(--text-muted, rgba(255, 255, 255, 0.75));
+    margin-bottom: 0.85rem;
+    line-height: 1.4;
+}
+
+.chance-buff-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+}
+
+.buff-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.6rem;
+    border-radius: 12px;
+    background: rgba(168, 85, 247, 0.15);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    color: #e9d5ff;
+}
+
+.chance-card-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 0.85rem;
+}
+
+.chance-display-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.chance-label-text {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chance-pill-btn {
+    width: 100%;
+    background: linear-gradient(135deg, rgba(147, 51, 234, 0.25), rgba(79, 70, 229, 0.25));
+    border: 1px solid rgba(168, 85, 247, 0.5);
+    border-radius: 10px;
+    padding: 0.65rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #fff;
+}
+
+.chance-pill-btn:hover {
+    background: linear-gradient(135deg, rgba(147, 51, 234, 0.4), rgba(79, 70, 229, 0.4));
+    border-color: #c084fc;
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+}
+
+.chance-pill-main {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+}
+
+.chance-pct {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #4ade80;
+}
+
+.chance-ratio {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.chance-inspect-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #c084fc;
+    background: rgba(192, 132, 252, 0.15);
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+}
+
+.chance-pill-locked {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 0.65rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.chance-pill-locked .chance-val {
+    font-size: 1rem;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.chance-pill-locked .chance-sub {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Modals for Chance Details */
+.chance-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+.chance-modal {
+    background: #12121a;
+    border: 1px solid rgba(168, 85, 247, 0.5);
+    border-radius: 16px;
+    max-width: 620px;
+    width: 100%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(168, 85, 247, 0.25);
+    overflow: hidden;
+    animation: modalPopIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalPopIn {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-title-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.modal-title {
+    margin: 0;
+    font-size: 1.35rem;
+    color: #e9d5ff;
+}
+
+.modal-close-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.8rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.modal-close-btn:hover {
+    color: #fff;
+}
+
+.modal-body {
+    padding: 1.5rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.chance-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
+}
+
+.chance-stat-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.chance-stat-card.highlight {
+    background: rgba(34, 197, 94, 0.1);
+    border-color: rgba(34, 197, 94, 0.3);
+}
+
+.chance-stat-label {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+}
+
+.chance-stat-value {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #fff;
+}
+
+.chance-stat-sub {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.text-gold {
+    color: #f59e0b;
+}
+
+.text-green {
+    color: #4ade80;
+}
+
+.modifiers-title {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #c084fc;
+    margin-bottom: 0.75rem;
+}
+
+.modifiers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.modifier-item-card {
+    background: rgba(20, 20, 30, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.modifier-item-card.mod-active {
+    border-color: rgba(74, 222, 128, 0.35);
+    background: rgba(15, 30, 20, 0.5);
+}
+
+.mod-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mod-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.mod-status-tag.mod-active {
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 0.2rem 0.55rem;
+    border-radius: 10px;
+    background: rgba(34, 197, 94, 0.15);
+    border: 1px solid rgba(34, 197, 94, 0.4);
+    color: #4ade80;
+}
+
+.mod-status-tag.mod-inactive {
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 0.2rem 0.55rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-muted);
+}
+
+.mod-value-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.mod-value {
+    color: #f59e0b;
+}
+
+.mod-description {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.35;
+    margin: 0;
+}
+
+.modal-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: flex-end;
+}
+
+body.low-graphics .cosmic-chance-card,
+body.low-graphics .chance-modal,
+body.low-graphics .modifier-item-card {
+    box-shadow: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    background: #141419 !important;
+}
+
+/* ==========================================================================
+   COSMIC OCCASION VFX OVERLAY SYSTEM (Floating Particles & Anomaly Objects)
+   ========================================================================== */
+
+.cosmic-vfx-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1; /* Floating behind interactive UI cards */
+    overflow: hidden;
+}
+
+.cosmic-vfx-particles-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.cosmic-vfx-particle {
+    position: absolute;
+    bottom: -20px;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: floatParticleUp linear infinite;
+}
+
+@keyframes floatParticleUp {
+    0% {
+        transform: translateY(0) scale(0.6) rotate(0deg);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.85;
+    }
+    80% {
+        opacity: 0.85;
+    }
+    100% {
+        transform: translateY(-105vh) scale(1.4) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Concept-driven Particle Colors per Cosmic Occasion */
+.cosmic-vfx-particle.time_pulse {
+    background: radial-gradient(circle, #60a5fa, #3b82f6);
+    box-shadow: 0 0 10px #60a5fa;
+}
+
+.cosmic-vfx-particle.causal_shift {
+    background: radial-gradient(circle, #4ade80, #22c55e);
+    box-shadow: 0 0 10px #4ade80;
+}
+
+.cosmic-vfx-particle.paradox_loop {
+    background: radial-gradient(circle, #c084fc, #a855f7);
+    box-shadow: 0 0 12px #c084fc;
+}
+
+.cosmic-vfx-particle.time_collapse {
+    background: radial-gradient(circle, #f472b6, #ec4899);
+    box-shadow: 0 0 14px #f472b6;
+}
+
+.cosmic-vfx-particle.reality_fracture {
+    background: radial-gradient(circle, #fbbf24, #f59e0b);
+    box-shadow: 0 0 16px #fbbf24;
+}
+
+.cosmic-vfx-particle.null_paradox {
+    background: radial-gradient(circle, #38bdf8, #0ea5e9);
+    box-shadow: 0 0 18px #38bdf8;
+}
+
+.cosmic-vfx-particle.omniversal_break {
+    background: radial-gradient(circle, #fca5a5, #ef4444);
+    box-shadow: 0 0 20px #ef4444, 0 0 30px #facc15;
+}
+
+.cosmic-vfx-particle.solitary_star {
+    background: radial-gradient(circle, #ffffff, #fde047);
+    box-shadow: 0 0 22px #fde047;
+}
+
+.cosmic-vfx-particle.supernova {
+    background: radial-gradient(circle, #ffffff, #ff4800);
+    box-shadow: 0 0 25px #ff4800, 0 0 35px #ef4444;
+}
+
+/* Ambient Corner Anomaly Graphic Objects */
+.cosmic-corner-accent {
+    position: fixed;
+    width: 160px;
+    height: 160px;
+    pointer-events: none;
+    opacity: 0.35;
+    filter: drop-shadow(0 0 18px currentColor);
+    transition: opacity 0.5s ease-in-out;
+    z-index: 1;
+}
+
+.cosmic-corner-accent.top-right {
+    top: 15px;
+    right: 20px;
+}
+
+.cosmic-corner-accent.bottom-left {
+    bottom: 20px;
+    left: 20px;
+}
+
+.cosmic-vfx-object {
+    width: 100%;
+    height: 100%;
+}
+
+.cosmic-svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* SVG Graphic Animations */
+.svg-ring-pulse {
+    animation: svgPulseScale 3s infinite alternate ease-in-out;
+}
+
+.svg-ring-rotate-cw {
+    transform-origin: center;
+    animation: svgRotateCw 12s linear infinite;
+}
+
+.svg-ring-rotate-ccw {
+    transform-origin: center;
+    animation: svgRotateCcw 10s linear infinite;
+}
+
+.svg-hand-fast {
+    transform-origin: 100px 100px;
+    animation: svgRotateCw 3s linear infinite;
+}
+
+.svg-hand-slow {
+    transform-origin: 100px 100px;
+    animation: svgRotateCw 12s linear infinite;
+}
+
+.svg-poly-shift-1 {
+    transform-origin: center;
+    animation: svgPolyShift1 4s ease-in-out infinite alternate;
+}
+
+.svg-poly-shift-2 {
+    transform-origin: center;
+    animation: svgPolyShift2 4s ease-in-out infinite alternate;
+}
+
+.svg-infinity-loop {
+    transform-origin: center;
+    animation: svgInfinityPulse 3s ease-in-out infinite alternate;
+}
+
+.svg-ring-collapse {
+    transform-origin: center;
+    animation: svgCollapseRing 4s linear infinite;
+}
+
+.svg-ring-collapse-fast {
+    transform-origin: center;
+    animation: svgCollapseRing 2s linear infinite reverse;
+}
+
+.svg-shard-core {
+    transform-origin: center;
+    animation: svgShardRotate 6s ease-in-out infinite alternate;
+}
+
+.svg-lightning-bolt, .svg-lightning-bolt-2 {
+    animation: svgFlicker 1.2s infinite alternate;
+}
+
+.svg-blackhole-rim {
+    transform-origin: center;
+    animation: svgBlackholePulse 2.5s infinite alternate;
+}
+
+.svg-shockwave-1 {
+    transform-origin: center;
+    animation: svgShockwaveExpand 2s infinite linear;
+}
+
+.svg-shockwave-2 {
+    transform-origin: center;
+    animation: svgShockwaveExpand 2s infinite linear 1s;
+}
+
+.svg-starburst-apex {
+    transform-origin: center;
+    animation: svgRotateCw 8s linear infinite;
+}
+
+.svg-star-core-glow {
+    animation: svgStarGlowPulse 2s infinite alternate ease-in-out;
+}
+
+.svg-sun-rays {
+    transform-origin: 100px 100px;
+    animation: svgRotateCw 20s linear infinite;
+}
+
+.svg-supernova-blast {
+    transform-origin: center;
+    animation: svgSupernovaExpand 1.5s infinite linear;
+}
+
+@keyframes svgPulseScale {
+    0% { transform: scale(0.92); opacity: 0.6; }
+    100% { transform: scale(1.08); opacity: 1; }
+}
+
+@keyframes svgRotateCw {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes svgRotateCcw {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+}
+
+@keyframes svgPolyShift1 {
+    0% { transform: scale(1) rotate(0deg); }
+    100% { transform: scale(1.12) rotate(15deg); }
+}
+
+@keyframes svgPolyShift2 {
+    0% { transform: scale(1) rotate(0deg); }
+    100% { transform: scale(0.9) rotate(-15deg); }
+}
+
+@keyframes svgInfinityPulse {
+    0% { transform: scale(0.95); filter: drop-shadow(0 0 10px #c084fc); }
+    100% { transform: scale(1.1); filter: drop-shadow(0 0 30px #e879f9); }
+}
+
+@keyframes svgCollapseRing {
+    0% { transform: scale(1.2) rotate(0deg); opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { transform: scale(0.6) rotate(180deg); opacity: 0.1; }
+}
+
+@keyframes svgShardRotate {
+    0% { transform: scale(0.9) rotate(0deg); }
+    100% { transform: scale(1.15) rotate(45deg); }
+}
+
+@keyframes svgFlicker {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+}
+
+@keyframes svgBlackholePulse {
+    0% { transform: scale(0.95); stroke-width: 4px; }
+    100% { transform: scale(1.08); stroke-width: 8px; }
+}
+
+@keyframes svgShockwaveExpand {
+    0% { transform: scale(0.4); opacity: 1; stroke-width: 8px; }
+    100% { transform: scale(1.3); opacity: 0; stroke-width: 1px; }
+}
+
+@keyframes svgStarGlowPulse {
+    0% { transform: scale(0.9); opacity: 0.7; }
+    100% { transform: scale(1.15); opacity: 1; }
+}
+
+@keyframes svgSupernovaExpand {
+    0% { transform: scale(0.3); opacity: 1; stroke-width: 12px; }
+    100% { transform: scale(1.4); opacity: 0; stroke-width: 2px; }
+}
+
+body.low-graphics .cosmic-vfx-overlay {
+    display: none !important;
+}
+
+/* ==========================================================================
+   OFFLINE PROGRESS MODAL SYSTEM
+   ========================================================================== */
+.offline-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(8, 10, 18, 0.82);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    animation: fadeInModal 0.3s ease-out;
+}
+
+.offline-modal-overlay.closing {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.offline-modal-card {
+    background: linear-gradient(145deg, rgba(20, 24, 38, 0.95), rgba(12, 14, 24, 0.98));
+    border: 1px solid rgba(255, 215, 0, 0.35);
+    box-shadow: 0 0 35px rgba(255, 215, 0, 0.18), 0 20px 40px rgba(0, 0, 0, 0.6);
+    border-radius: 20px;
+    width: 90%;
+    max-width: 520px;
+    padding: 2rem;
+    text-align: center;
+    color: #e2e8f0;
+    animation: popInModal 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popInModal {
+    0% { transform: scale(0.85); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.offline-modal-header {
+    margin-bottom: 1.5rem;
+}
+
+.offline-icon-badge {
+    font-size: 3rem;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.5));
+}
+
+.offline-modal-header h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #ffd700, #ff8c00);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.4rem;
+}
+
+.offline-modal-subtitle {
+    font-size: 0.92rem;
+    color: #94a3b8;
+}
+
+.offline-summary-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-bottom: 1.5rem;
+}
+
+.offline-stat-card {
+    background: rgba(30, 41, 59, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 0.9rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-align: left;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.offline-stat-card:hover {
+    border-color: rgba(255, 215, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+.offline-stat-icon {
+    font-size: 1.8rem;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
+.offline-stat-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.offline-stat-label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #64748b;
+    margin-bottom: 2px;
+}
+
+.offline-stat-value {
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.offline-stat-value.highlight-cyan {
+    color: #38bdf8;
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+}
+
+.offline-stat-value.highlight-gold {
+    color: #ffd700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+}
+
+.offline-stat-value.highlight-purple {
+    color: #c084fc;
+    text-shadow: 0 0 10px rgba(192, 132, 252, 0.4);
+}
+
+.offline-stat-value.muted-text {
+    color: #64748b;
+}
+
+.offline-stat-subtext {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin-top: 1px;
+}
+
+.offline-cap-badge {
+    font-size: 0.75rem;
+    color: #f87171;
+    font-weight: 600;
+}
+
+.offline-total-box {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.12), rgba(255, 140, 0, 0.12));
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    border-radius: 14px;
+    padding: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    margin-bottom: 1.5rem;
+    box-shadow: inset 0 0 15px rgba(255, 215, 0, 0.08);
+}
+
+.offline-total-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #cbd5e1;
+}
+
+.offline-total-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #ffd700;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+}
+
+.offline-claim-btn {
+    width: 100%;
+    padding: 0.9rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 12px;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #ffd700, #ff8c00);
+    color: #0b0f19;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.offline-claim-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.55);
 }

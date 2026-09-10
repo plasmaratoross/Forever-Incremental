@@ -64,20 +64,23 @@ export function renderAchievementsUI(containerId) {
                         <a href="game.html" class="click-btn secondary-btn back-game-btn">
                             <span>◀ ${t('navPlay')}</span>
                         </a>
-                        <h2 class="achievements-main-title">🏆 ACHIEVEMENTS</h2>
+                        <h2 class="achievements-main-title">${t('achievementsTitle')}</h2>
                         <div class="total-bonus-chip">
-                            <span class="bonus-chip-label">Permanent Bonuses:</span>
+                            <span class="bonus-chip-label">${t('permanentBonusesLabel')}</span>
                             <span id="ach-total-bonus-val" class="bonus-chip-val">+0.0%</span>
                         </div>
                     </div>
                     <p class="achievements-subtitle">
-                        Permanent progression unlocked automatically through cumulative gameplay milestones.
+                        ${t('achievementsTagline')}
                     </p>
                 </div>
 
                 <!-- 4 Achievement Category Cards List -->
                 <div class="achievements-grid">
-                    ${ACHIEVEMENT_DEFS.map(def => `
+                    ${ACHIEVEMENT_DEFS.map(def => {
+                        const catName = t(`ach_cat_${def.id}_name`, def.name);
+                        const catDesc = t(`ach_cat_${def.id}_desc`, def.description);
+                        return `
                         <div id="ach-card-${def.id}" class="achievement-card tier-frame-basic">
                             <div class="achievement-card-header">
                                 <div class="achievement-icon-wrapper">
@@ -85,10 +88,10 @@ export function renderAchievementsUI(containerId) {
                                 </div>
                                 <div class="achievement-title-group">
                                     <div class="achievement-title-row">
-                                        <h3 class="achievement-name">${def.name}</h3>
+                                        <h3 class="achievement-name">${catName}</h3>
                                         <span id="ach-tier-badge-${def.id}" class="tier-badge tier-badge-basic">BASIC</span>
                                     </div>
-                                    <p class="achievement-desc">${def.description}</p>
+                                    <p class="achievement-desc">${catDesc}</p>
                                 </div>
                             </div>
 
@@ -108,7 +111,7 @@ export function renderAchievementsUI(containerId) {
                                 </div>
                             </div>
                         </div>
-                    `).join('')}
+                    `;}).join('')}
                 </div>
 
                 <!-- Lore Modal Placeholder Container -->
@@ -170,7 +173,7 @@ export function renderAchievementsUI(containerId) {
 
             if (tierBadgeEl) {
                 tierBadgeEl.className = `tier-badge ${tier.badgeClass}`;
-                tierBadgeEl.textContent = tier.name.toUpperCase();
+                tierBadgeEl.textContent = t(`tier_${tier.name.toLowerCase()}`, tier.name).toUpperCase();
             }
 
             if (levelTextEl) {
@@ -191,7 +194,7 @@ export function renderAchievementsUI(containerId) {
             }
 
             if (nextBoostEl) {
-                nextBoostEl.textContent = isMax ? 'MAX LEVEL' : `Next: +${BONUS_PER_LEVEL}%`;
+                nextBoostEl.textContent = isMax ? t('btnMaxed') : `Next: +${BONUS_PER_LEVEL}%`;
             }
         });
 

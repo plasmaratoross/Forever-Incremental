@@ -31,6 +31,7 @@ export const INITIAL_STATE = {
     autoclickUnlocked: false,        // Permanent unlock flag for Autoclick (Unlocked at Rebirth 3)
     autoclickEnabled: false,         // Autoclick ON/OFF toggle state
     cosmicEventsUnlocked: false,     // Permanent unlock flag for Cosmic Events System (Unlocked at Rebirth 3)
+    cosmicEventState: null,          // Serialized Cosmic Events state snapshot { status, nextRollTime, activeEvent }
     debugUnlocked: false,            // Admin Debug Mode unlock flag (Unlocked via password in Settings)
     debugModeActive: false,          // Admin Debug Mode active toggle (ON/OFF, only visible after unlock)
     debugGameSpeed: 1.0,             // Admin Debug Game Speed multiplier (1.0x - 5.0x)
@@ -61,6 +62,7 @@ export const INITIAL_STATE = {
     achievements: {                     // Achievements lore unlock tracking map { [loreKey]: boolean }
         loreUnlocked: {}
     },
-    badges: {}                          // Cosmetic Badges unlock tracking map { [badgeId]: boolean }
+    badges: {},                         // Cosmetic Badges unlock tracking map { [badgeId]: boolean }
+    badgeUpgrades: {}                   // Permanent Badge Upgrades purchase tracking map { [upgradeId]: boolean }
 };
 
