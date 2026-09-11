@@ -14,6 +14,7 @@ import { addCurrency } from './currency.js';
 import { audioManager } from '../audio/audioManager.js';
 import { calculateClickReward, runtimeState } from '../upgrades/upgrades.js';
 import { showNotification } from '../ui/notifications.js';
+import { saveGame } from '../save/save.js';
 
 const BASE_COOLDOWN_MS = 300; // 0.3 second base click cooldown
 let lastClickTime = 0;
@@ -62,22 +63,31 @@ export function handleClick(event) {
     audioManager.playClickSFX();
 
     // Trigger visual feedback for special click effects
-    if (result.isResonant) {
-        showNotification('⚡ RESONANT FORCE! 3x Damage!');
-    }
-    if (result.isCrit) {
+    if (result.isSuperCrit) {
+        showNotification(`⚡💥 SUPER CRIT! ${result.superCritMult || 100}x DAMAGE!`);
+        audioManager.playAchievementSFX();
+    } else if (result.isSolarBurst) {
+        showNotification('☀️ SOLAR BURST! 50x Cataclysmic Flare!');
+    } else if (result.isPrimordialNova) {
+        showNotification('💥 PRIMORDIAL NOVA! 25x Burst + 15s Windfall!');
+    } else if (result.isCrit) {
         showNotification('💥 CRITICAL MASS! 5x CRIT!');
+    } else if (result.isResonant) {
+        showNotification('⚡ RESONANT FORCE! 3x Damage!');
     }
     if (result.isSingularityTrigger) {
         showNotification('🌌 SINGULARITY ACTIVATED! 10x Global Production for 5s!');
     }
 
     // Update lifetime total click statistics
-    const currentStats = currentState.stats || {};
+    const stateAfterAdd = stateManager.getState();
+    const currentStats = stateAfterAdd.stats || {};
     const currentClicks = currentStats.totalClicks || 0;
     const currentClicksAll = currentStats.totalClicksAll || currentClicks;
+    const currentSuperCrits = currentStats.totalSuperCrits || 0;
     const nextClickCount = currentClicks + 1;
     const nextClickCountAll = currentClicksAll + 1;
+    const nextSuperCrits = result.isSuperCrit ? (currentSuperCrits + 1) : currentSuperCrits;
 
     // Check Neural Resonance (#11 Advanced Upgrade): Every 20th manual click awards 5x bonus click reward
     const purchased = currentState.upgrades || {};
@@ -87,11 +97,13 @@ export function handleClick(event) {
         showNotification('🧠 NEURAL RESONANCE! 5x Bonus Click!');
     }
 
+    const stateFinal = stateManager.getState();
     stateManager.setState({
         stats: {
-            ...currentStats,
+            ...(stateFinal.stats || currentStats),
             totalClicks: nextClickCount,
-            totalClicksAll: nextClickCountAll
+            totalClicksAll: nextClickCountAll,
+            totalSuperCrits: nextSuperCrits
         }
     });
 
@@ -107,10 +119,17 @@ export function handleClick(event) {
     return true;
 }
 
+let isTogglingAutoclick = false;
+
 /**
  * Toggle Autoclick ON/OFF setting
  */
 export function toggleAutoclick() {
+    if (isTogglingAutoclick) return stateManager.getState().autoclickEnabled;
+    isTogglingAutoclick = true;
+    setTimeout(() => { isTogglingAutoclick = false; }, 150);
+
+    audioManager.playClickSFX();
     const currentState = stateManager.getState();
     const nextState = !currentState.autoclickEnabled;
     stateManager.setState({ autoclickEnabled: nextState });
@@ -138,7 +157,8 @@ export function handleAutoclick(count = 1) {
     addCurrency(totalAmount);
 
     // Update total clicks without spamming multiple state writes
-    const currentStats = currentState.stats || {};
+    const stateAfterAdd = stateManager.getState();
+    const currentStats = stateAfterAdd.stats || {};
     const currentClicksAll = currentStats.totalClicksAll || (currentStats.totalClicks || 0);
 
     stateManager.setState({
@@ -147,6 +167,10 @@ export function handleAutoclick(count = 1) {
             totalClicksAll: currentClicksAll + count
         }
     });
+
+    if (result.isPrimordialNova) {
+        showNotification('💥 PRIMORDIAL NOVA! 25x Burst + 15s Windfall!');
+    }
 
     return true;
 }

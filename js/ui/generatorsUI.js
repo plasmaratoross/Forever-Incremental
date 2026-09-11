@@ -22,6 +22,7 @@ import { formatNumber } from '../utils/format.js';
 const r2Generators = GENERATOR_DEFS.filter(g => (g.reqRebirth || 2) === 2);
 const r3Generators = GENERATOR_DEFS.filter(g => g.reqRebirth === 3);
 const r4Generators = GENERATOR_DEFS.filter(g => g.reqRebirth === 4);
+const r5Generators = GENERATOR_DEFS.filter(g => g.reqRebirth === 5);
 
 let activeBuyMode = '1';
 
@@ -60,6 +61,7 @@ export function renderGeneratorsUI(containerId) {
         const buildGenCardHTML = (def) => {
             const isCosmic = def.tier === 'cosmic';
             const isLegendary = def.tier === 'legendary';
+            const isMultiplicity = def.tier === 'multiplicity';
             const maxLevel = def.maxLevel || 10;
             const genName = t(`gen_${def.id}_name`, def.name);
             const genDesc = t(`gen_${def.id}_desc`, def.description);
@@ -67,13 +69,14 @@ export function renderGeneratorsUI(containerId) {
             const tierText = t(tierKey, def.tier.toUpperCase());
 
             return `
-                <div class="upgrade-item-card generator-item-card ${isCosmic ? 'cosmic-card' : ''} ${isLegendary ? 'legendary-card' : ''} locked"
+                <div class="upgrade-item-card generator-item-card ${isCosmic ? 'cosmic-card' : ''} ${isLegendary ? 'legendary-card' : ''} ${isMultiplicity ? 'multiplicity-card' : ''} locked"
                      id="gen-card-${def.id}">
                     <div class="upgrade-item-header">
                         <div class="gen-title-group">
                             <span class="status-badge tier-badge ${def.tier}-tier">${tierText}</span>
                             <h3 class="upgrade-item-name">${genName}</h3>
                             ${isLegendary ? `<span class="ultimate-tag">✨ ${t('ultimateBadge')}</span>` : ''}
+                            ${isMultiplicity ? `<span class="ultimate-tag multiplicity-badge">🔮 ${t('multiplicityBadge', 'MULTIPLICITY')}</span>` : ''}
                         </div>
                         <div id="gen-level-badge-${def.id}" class="gen-level-badge">
                             ${t('levelLabel')}: 0 / ${maxLevel}
@@ -96,7 +99,7 @@ export function renderGeneratorsUI(containerId) {
                     <div class="upgrade-item-footer">
                         <div class="upgrade-cost-tag">
                             <span class="cost-label">${t('costLabel')}:</span>
-                            <span id="gen-cost-${def.id}" class="cost-value ${isLegendary || isCosmic ? 'highlight-gold' : ''}">
+                            <span id="gen-cost-${def.id}" class="cost-value ${isLegendary || isCosmic || isMultiplicity ? 'highlight-gold' : ''}">
                                 0 Points
                             </span>
                         </div>
@@ -131,6 +134,15 @@ export function renderGeneratorsUI(containerId) {
         `;
         r4Generators.forEach(def => { r4HTML += buildGenCardHTML(def); });
         r4HTML += `</div>`;
+
+        let r5HTML = `
+            <div id="multiplicity-locked-banner" class="advanced-locked-banner" style="display:none;">
+                <p>${t('multiplicityGeneratorsLockedNotice')}</p>
+            </div>
+            <div id="multiplicity-generators-list" class="generators-list" style="display:none;">
+        `;
+        r5Generators.forEach(def => { r5HTML += buildGenCardHTML(def); });
+        r5HTML += `</div>`;
 
         container.innerHTML = `
             <div class="game-card generators-card">
@@ -179,6 +191,12 @@ export function renderGeneratorsUI(containerId) {
                     <h3>✨ ${t('transcendentGeneratorsSection')} (11-17)</h3>
                 </div>
                 ${r4HTML}
+
+                <!-- Section 4: Multiplicity Generators (Rebirth 5) -->
+                <div class="upgrades-section-header multiplicity-header">
+                    <h3>🔮 ${t('multiplicityGeneratorsSection')} (18-27)</h3>
+                </div>
+                ${r5HTML}
             </div>
         `;
 
@@ -271,11 +289,25 @@ export function renderGeneratorsUI(containerId) {
             }
         }
 
+        // Show/hide Multiplicity section based on rebirth
+        const multBanner = document.getElementById('multiplicity-locked-banner');
+        const multList = document.getElementById('multiplicity-generators-list');
+        if (multBanner && multList) {
+            if (rebirthCount >= 5) {
+                multBanner.style.display = 'none';
+                multList.style.display = '';
+            } else {
+                multBanner.style.display = '';
+                multList.style.display = 'none';
+            }
+        }
+
         // Update each generator card in-place
         const allDefs = [
             ...r2Generators,
             ...(rebirthCount >= 3 ? r3Generators : []),
-            ...(rebirthCount >= 4 ? r4Generators : [])
+            ...(rebirthCount >= 4 ? r4Generators : []),
+            ...(rebirthCount >= 5 ? r5Generators : [])
         ];
         allDefs.forEach(def => {
             const level = generatorsMap[def.id] || 0;

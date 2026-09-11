@@ -13,9 +13,10 @@ import { stateManager } from '../core/state.js';
 import { saveGame } from '../save/save.js';
 import { isSingularityActive } from '../upgrades/upgrades.js';
 import { showNotification } from '../ui/notifications.js';
-import { getCurrentEventPointGenMult } from './cosmicEvents.js';
+import { getCurrentEventPointGenMult, getCurrentEventCostDiscountMult, isCurrentEventCreationFrenzy } from './cosmicEvents.js';
 import { getAchievementBonus } from './achievements.js';
-import { getBadgeUpgradePointGenMult } from './badgeUpgrades.js';
+import { getBadgeUpgradePointGenMult, getBadgeUpgradeCostDiscountMult } from './badgeUpgrades.js';
+import { getStardustPointMult } from './stardust.js';
 
 /**
  * Definitions for the 5 Point Generators (10 levels max per generator)
@@ -229,6 +230,128 @@ export const GENERATOR_DEFS = [
         costScaling: 2.5,
         reqRebirth: 4,
         description: 'The supreme matrix spanning all realities, generating endless Points.'
+    },
+
+    // Rebirth 5 Multiplicity Generators (#18 - #27, 30 levels max each)
+    {
+        id: 'stardust_collector',
+        name: 'Stardust Collector',
+        tier: 'multiplicity',
+        baseGen: 1000000000000000000000000000000000000000000,   // 1 Td Pts/sec at Level 1 (1e42)
+        baseCost: 100000000000000000000000000000000000000000000, // 100 Td Points at Level 1 (1e44)
+        maxLevel: 30,
+        genScaling: 1.85,
+        costScaling: 2.6,
+        reqRebirth: 5,
+        description: 'Condenses celestial stardust directly into concentrated Point cascades.'
+    },
+    {
+        id: 'astral_harvester',
+        name: 'Astral Harvester',
+        tier: 'multiplicity',
+        baseGen: 1000000000000000000000000000000000000000000000, // 1 QaD Pts/sec at Level 1 (1e45)
+        baseCost: 100000000000000000000000000000000000000000000000, // 100 QaD Points at Level 1 (1e47)
+        maxLevel: 30,
+        genScaling: 1.85,
+        costScaling: 2.6,
+        reqRebirth: 5,
+        description: 'Harvests primordial astral leylines, reducing creation costs.'
+    },
+    {
+        id: 'chronal_hyperprism',
+        name: 'Chronal Hyperprism',
+        tier: 'multiplicity',
+        baseGen: 1000000000000000000000000000000000000000000000000, // 1 QiD Pts/sec at Level 1 (1e48)
+        baseCost: 100000000000000000000000000000000000000000000000000, // 100 QiD Points at Level 1 (1e50)
+        maxLevel: 30,
+        genScaling: 1.85,
+        costScaling: 2.6,
+        reqRebirth: 5,
+        description: 'Refracts localized timelines through a hyper-dimensional prism.'
+    },
+    {
+        id: 'subatomic_annihilator',
+        name: 'Subatomic Annihilator',
+        tier: 'multiplicity',
+        baseGen: 1000000000000000000000000000000000000000000000000000, // 1 SxD Pts/sec at Level 1 (1e51)
+        baseCost: 100000000000000000000000000000000000000000000000000000, // 100 SxD Points at Level 1 (1e53)
+        maxLevel: 30,
+        genScaling: 1.85,
+        costScaling: 2.6,
+        reqRebirth: 5,
+        description: 'Collides antimatter matrices at relativistic velocities to release Point energy.'
+    },
+    {
+        id: 'hyperdimensional_crucible',
+        name: 'Hyperdimensional Crucible',
+        tier: 'multiplicity',
+        baseGen: 1000000000000000000000000000000000000000000000000000000, // 1 SpD Pts/sec at Level 1 (1e54)
+        baseCost: 100000000000000000000000000000000000000000000000000000000, // 100 SpD Points at Level 1 (1e56)
+        maxLevel: 30,
+        genScaling: 1.85,
+        costScaling: 2.6,
+        reqRebirth: 5,
+        description: 'Smelts higher-dimensional geometries into pure Point matter.'
+    },
+    {
+        id: 'tachyon_forge',
+        name: 'Tachyon Forge',
+        tier: 'multiplicity',
+        baseGen: 10000000000000000000000000000000000000000000000000000000000, // 1 OcD Pts/sec at Level 1 (1e57)
+        baseCost: 1000000000000000000000000000000000000000000000000000000000000, // 100 OcD Points at Level 1 (1e59)
+        maxLevel: 30,
+        genScaling: 1.85,
+        costScaling: 2.6,
+        reqRebirth: 5,
+        description: 'Forges faster-than-light particles to hyper-charge systemic automation.'
+    },
+    {
+        id: 'entropy_inverter',
+        name: 'Entropy Inverter',
+        tier: 'multiplicity',
+        baseGen: 10000000000000000000000000000000000000000000000000000000000000, // 1 NoD Pts/sec at Level 1 (1e60)
+        baseCost: 1000000000000000000000000000000000000000000000000000000000000000, // 100 NoD Points at Level 1 (1e62)
+        maxLevel: 30,
+        genScaling: 1.85,
+        costScaling: 2.6,
+        reqRebirth: 5,
+        description: 'Reverses thermodynamic decay, stabilizing fleeting cosmic anomalies.'
+    },
+    {
+        id: 'mycelial_world_tree',
+        name: 'Mycelial World Tree',
+        tier: 'multiplicity',
+        baseGen: 10000000000000000000000000000000000000000000000000000000000000000, // 1 Vg Pts/sec at Level 1 (1e63)
+        baseCost: 1000000000000000000000000000000000000000000000000000000000000000000, // 100 Vg Points at Level 1 (1e65)
+        maxLevel: 30,
+        genScaling: 1.85,
+        costScaling: 2.6,
+        reqRebirth: 5,
+        description: 'An organic cosmic root system intertwining life and points across dimensions.'
+    },
+    {
+        id: 'void_singularity_matrix',
+        name: 'Void Singularity Matrix',
+        tier: 'multiplicity',
+        baseGen: 10000000000000000000000000000000000000000000000000000000000000000000, // 1 UVg Pts/sec at Level 1 (1e66)
+        baseCost: 1000000000000000000000000000000000000000000000000000000000000000000000, // 100 UVg Points at Level 1 (1e68)
+        maxLevel: 30,
+        genScaling: 1.85,
+        costScaling: 2.6,
+        reqRebirth: 5,
+        description: 'Harnesses supermassive singularity horizons to amplify all generator output.'
+    },
+    {
+        id: 'multiplicity_core',
+        name: 'Multiplicity Core',
+        tier: 'multiplicity',
+        baseGen: 10000000000000000000000000000000000000000000000000000000000000000000000, // 1 DVg Pts/sec at Level 1 (1e69)
+        baseCost: 1000000000000000000000000000000000000000000000000000000000000000000000000, // 100 DVg Points at Level 1 (1e71)
+        maxLevel: 30,
+        genScaling: 1.85,
+        costScaling: 2.6,
+        reqRebirth: 5,
+        description: 'The supreme nexus of multiplicity, exponentially multiplying all powers of creation.'
     }
 ];
 
@@ -337,7 +460,20 @@ export function getGeneratorCost(def, currentLevel) {
     const maxLevel = def ? (def.maxLevel || 10) : 10;
     if (!def || currentLevel >= maxLevel) return Infinity;
     const scaling = def.costScaling || 2.0;
-    return Math.floor(def.baseCost * Math.pow(scaling, currentLevel));
+    const baseCost = Math.floor(def.baseCost * Math.pow(scaling, currentLevel));
+    const eventDiscount = getCurrentEventCostDiscountMult();
+    const badgeDiscount = getBadgeUpgradeCostDiscountMult();
+
+    const state = stateManager.getState();
+    // Multiplicity: Entropy Dissolution (-25% discount)
+    const hasEntropyDissolution = !!(state.upgrades && state.upgrades['entropy_dissolution']);
+    const multiplicityDiscount = hasEntropyDissolution ? 0.75 : 1.00;
+
+    // Multiplicity: Astral Harvester perk (-2% per 5 levels, up to -12%)
+    const astralLvl = (state.generators && state.generators.astral_harvester) || 0;
+    const astralDiscount = Math.max(0.70, 1.0 - (Math.floor(astralLvl / 5) * 0.02));
+
+    return Math.max(1, Math.floor(baseCost * eventDiscount * badgeDiscount * multiplicityDiscount * astralDiscount));
 }
 
 /**
@@ -363,7 +499,15 @@ export function getBasePointGeneration(state) {
  * Stacks with:
  * - Rebirth Multiplier (state.rebirthMultiplier)
  * - Singularity 10x Global Production Burst (isSingularityActive)
- * - Reality Engine (+15%) & Infinite Singularity (+50%)
+ * - Reality Engine (+15%), Infinite Singularity (+50%), Fractal Multiplier (x2.5), Celestial Cataclysm (x2), Apex of Multiplicity (x10)
+ * - Cosmic Event Point Generation Multiplier (getCurrentEventPointGenMult)
+ * - Point Accumulator Achievement Bonus
+ * - Efficient Instinct Permanent Rebirth 2 Perk (+25%)
+ * - Rebirth 4 Permanent Power Bonus (x2.0 Point Generation)
+ * - Rebirth 5 Permanent Power Bonus (x4.0 Point Generation)
+ * - Stardust Point Multiplier (x1, x2, x4, x8, x16, x32)
+ * - Generator perks (Hyperdimensional Crucible, Void Singularity Matrix, Multiplicity Core)
+ * - Badge Upgrades Multipliers
  * @param {Object} [state] - Current state (or stateManager state)
  * @returns {number} Final actual Points/sec
  */
@@ -380,15 +524,54 @@ export function getTotalPointGeneration(state) {
     if (purchased['reality_engine']) upgradeGenMult *= 1.15;
     if (purchased['infinite_singularity']) upgradeGenMult *= 1.50;
 
+    // Multiplicity upgrades multipliers
+    if (purchased['fractal_multiplier']) upgradeGenMult *= 2.50;
+    if (purchased['celestial_cataclysm']) upgradeGenMult *= 2.00;
+    if (purchased['apex_of_multiplicity']) upgradeGenMult *= 10.00;
+
+    // Multiplicity generator perks:
+    // Hyperdimensional Crucible: +5% Point Multiplier per 5 levels
+    const crucibleLvl = (currentState.generators && currentState.generators.hyperdimensional_crucible) || 0;
+    if (crucibleLvl >= 5) {
+        upgradeGenMult *= (1 + (Math.floor(crucibleLvl / 5) * 0.05));
+    }
+
+    // Void Singularity Matrix: +15% per 5 levels
+    const voidMatLvl = (currentState.generators && currentState.generators.void_singularity_matrix) || 0;
+    if (voidMatLvl >= 5) {
+        upgradeGenMult *= (1 + (Math.floor(voidMatLvl / 5) * 0.15));
+    }
+
+    // Multiplicity Core: 2x Generator Output per 5 levels
+    const multiplicityCoreLvl = (currentState.generators && currentState.generators.multiplicity_core) || 0;
+    if (multiplicityCoreLvl >= 5) {
+        upgradeGenMult *= Math.pow(2, Math.floor(multiplicityCoreLvl / 5));
+    }
+
     const rebirthUpgrades = currentState.rebirthUpgrades || {};
     const hasEfficientInstinct = (rebirthCount >= 2) || !!rebirthUpgrades.efficient_instinct;
     const instinctPointGenMult = hasEfficientInstinct ? 1.25 : 1.00;
 
+    // Layer: Rebirth 4 Permanent Power Bonus (x2 Generator Production)
+    const currentStats = currentState.stats || {};
+    const hasR4PowerBonus = (rebirthCount >= 4) || ((currentStats.highestRebirth || 0) >= 4) || !!rebirthUpgrades.r4_power_bonus;
+    const r4PowerPointGenMult = hasR4PowerBonus ? 2.00 : 1.00;
+
+    // Layer: Rebirth 5 Permanent Power Bonus (x4 Generator Production)
+    const hasR5PowerBonus = (rebirthCount >= 5) || ((currentStats.highestRebirth || 0) >= 5) || !!rebirthUpgrades.r5_power_bonus;
+    const r5PowerPointGenMult = hasR5PowerBonus ? 4.00 : 1.00;
+
+    // Layer: Stardust Point Multiplier (x1, x2, x4, x8, x16, x32)
+    const stardustPointMult = getStardustPointMult(currentState);
+
     const rebirthMultiplier = currentState.rebirthMultiplier || 1;
     const burstMultiplier = isSingularityActive() ? 10 : 1;
+    const cosmicEventMultiplier = getCurrentEventPointGenMult();
+    const accumBonus = 1 + (getAchievementBonus(currentState, 'point_accumulator') / 100);
     const badgeUpgradePointGenMult = 1 + getBadgeUpgradePointGenMult(currentState);
+    const towerPointGenMult = 1 + ((currentState.tower && currentState.tower.bonuses && currentState.tower.bonuses.pointGen) || 0);
 
-    return baseGen * rebirthMultiplier * burstMultiplier * cosmicEventMultiplier * accumBonus * velBonus * upgradeGenMult * instinctPointGenMult * badgeUpgradePointGenMult;
+    return baseGen * rebirthMultiplier * burstMultiplier * cosmicEventMultiplier * accumBonus * upgradeGenMult * instinctPointGenMult * badgeUpgradePointGenMult * r4PowerPointGenMult * r5PowerPointGenMult * stardustPointMult * towerPointGenMult;
 }
 
 /**
@@ -431,7 +614,9 @@ export function purchaseGenerator(generatorId, mode = 1) {
     }
 
     // Deduct total cost and increment generator level by levelsToBuy
-    const newCurrency = currentCurrency - multiInfo.totalCost;
+    const isFree = isCurrentEventCreationFrenzy() && Math.random() < 0.25;
+    const finalCost = isFree ? 0 : multiInfo.totalCost;
+    const newCurrency = currentCurrency - finalCost;
     const newLevel = currentLevel + multiInfo.levelsToBuy;
     const newGenerators = {
         ...generators,
@@ -444,7 +629,9 @@ export function purchaseGenerator(generatorId, mode = 1) {
     });
 
     saveGame();
-    if (multiInfo.levelsToBuy === 1) {
+    if (isFree) {
+        showNotification(`🌟 CREATION FRENZY! Upgraded ${def.name} +${multiInfo.levelsToBuy} Level(s) completely FREE!`);
+    } else if (multiInfo.levelsToBuy === 1) {
         showNotification(`Upgraded ${def.name} to Level ${newLevel}!`);
     } else {
         showNotification(`Upgraded ${def.name} +${multiInfo.levelsToBuy} Levels (Now Level ${newLevel})!`);

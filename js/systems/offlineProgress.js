@@ -70,6 +70,7 @@ export function calculateAndApplyOfflineProgress(safeState) {
 
     // Update safeState values
     safeState.currency = (safeState.currency || 0) + totalOfflinePoints;
+    safeState.points = safeState.currency;
     safeState.lastSavedTimestamp = now;
 
     if (!safeState.stats) safeState.stats = {};

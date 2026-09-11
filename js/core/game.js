@@ -11,8 +11,9 @@ import { GAME_CONFIG } from './constants.js';
 import { stateManager } from './state.js';
 import { processCurrencyTick } from '../systems/currency.js';
 import { autoSaveGame } from '../save/save.js';
-import { tickCosmicEventsEngine, getCurrentEventGameSpeedMult } from '../systems/cosmicEvents.js';
+import { tickCosmicEventsEngine, getCurrentEventGameSpeedMult, getCurrentEventAutoclickSpeedMult } from '../systems/cosmicEvents.js';
 import { handleAutoclick } from '../systems/click.js';
+import { updateTicketRecovery } from '../systems/tower.js';
 
 export class GameEngine {
     constructor() {
@@ -62,8 +63,9 @@ export class GameEngine {
         const state = stateManager.getState();
         const debugSpeed = state.debugGameSpeed || 1.0;
         const eventSpeed = getCurrentEventGameSpeedMult();
+        const eventAutoclickMult = getCurrentEventAutoclickSpeedMult();
         const totalGameSpeed = debugSpeed * eventSpeed;
-        const autoclickSpeed = 1.0 + 0.10 * (totalGameSpeed - 1.0);
+        const autoclickSpeed = (1.0 + 0.10 * (totalGameSpeed - 1.0)) * eventAutoclickMult;
 
         if (state.autoclickEnabled) {
             this.autoclickAccumulator += GAME_CONFIG.TICK_RATE * autoclickSpeed;
@@ -79,8 +81,13 @@ export class GameEngine {
             this.autoclickAccumulator = 0;
         }
 
-        // 4. Accumulate active playtime and track highest PPS record
-        const deltaSec = (GAME_CONFIG.TICK_RATE / 1000) * gameSpeed;
+        // 4. Update Tower Ticket recovery timer if Rebirth 5+ reached
+        if ((state.rebirthCount || 0) >= 5) {
+            updateTicketRecovery(state);
+        }
+
+        // 5. Accumulate active playtime and track highest PPS record
+        const deltaSec = (GAME_CONFIG.TICK_RATE / 1000) * totalGameSpeed;
         const currentStats = state.stats || {};
         const currentPlaytime = currentStats.playtime || 0;
         

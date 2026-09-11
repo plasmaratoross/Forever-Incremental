@@ -28,6 +28,12 @@ class StateManager {
      * @param {Object} newState - Partial state object to merge
      */
     setState(newState) {
+        if (!newState) return;
+        if (newState.currency !== undefined && newState.points === undefined) {
+            newState.points = newState.currency;
+        } else if (newState.points !== undefined && newState.currency === undefined) {
+            newState.currency = newState.points;
+        }
         this.state = { ...this.state, ...newState };
         this.notify();
     }

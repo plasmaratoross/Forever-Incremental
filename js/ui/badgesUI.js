@@ -49,6 +49,16 @@ export function renderBadgesUI(containerId) {
             </span>`;
         }).join('');
 
+        let reqRebirthHTML = '';
+        if (def.reqRebirth) {
+            const currentR = state.rebirthCount || 0;
+            const highestR = (state.stats && state.stats.highestRebirth) || 0;
+            const meetsRebirth = currentR >= def.reqRebirth || highestR >= def.reqRebirth;
+            reqRebirthHTML = `<span class="badge-req-tag ${meetsRebirth ? 'unlocked' : 'locked'}">
+                ${meetsRebirth ? '✓' : '🔒'} ${t('rebirthBtn')} ${def.reqRebirth}
+            </span>`;
+        }
+
         let buttonHTML = '';
         if (isPurchased) {
             buttonHTML = `<button class="click-btn secondary-btn buy-badge-upgrade-btn" disabled>✓ ${t('purchasedBtn')}</button>`;
@@ -58,8 +68,10 @@ export function renderBadgesUI(containerId) {
             buttonHTML = `<button class="click-btn secondary-btn buy-badge-upgrade-btn" disabled>${t('statusLocked')} (${formatNumber(def.cost)} Points)</button>`;
         }
 
+        const themeClass = def.id.replace(/_/g, '-');
+
         return `
-            <div id="badge-upgrade-card-${def.id}" class="badge-upgrade-card ${isPurchased ? 'purchased' : (canBuy ? 'affordable' : 'locked')}">
+            <div id="badge-upgrade-card-${def.id}" class="badge-upgrade-card ${themeClass} ${isPurchased ? 'purchased' : (canBuy ? 'affordable' : 'locked')}">
                 <div class="badge-upgrade-header">
                     <h3 class="badge-upgrade-name">✨ ${uName}</h3>
                     <span class="badge-upgrade-badge-tag">${t('badgeUpgradesTitle')}</span>
@@ -67,7 +79,7 @@ export function renderBadgesUI(containerId) {
                 <p class="badge-upgrade-desc">${uDesc}</p>
                 <div class="badge-req-container">
                     <span class="badge-req-label">${t('reqBadgesLabel')}:</span>
-                    <div class="badge-req-tags">${reqBadgesHTML}</div>
+                    <div class="badge-req-tags">${reqBadgesHTML}${reqRebirthHTML}</div>
                 </div>
                 <div class="badge-upgrade-footer">
                     <div class="badge-upgrade-cost">
@@ -282,7 +294,7 @@ export function renderBadgesUI(containerId) {
             const canBuy = canPurchaseBadgeUpgrade(def.id, state);
             const prevCache = badgeUpgradeStateCache[def.id] || {};
 
-            if (prevCache.isPurchased !== isPurchased || prevCache.canBuy !== canBuy || prevCache.currency !== state.currency) {
+            if (prevCache.isPurchased !== isPurchased || prevCache.canBuy !== canBuy) {
                 const card = document.getElementById(`badge-upgrade-card-${def.id}`);
                 if (card) {
                     const newCardHTML = buildBadgeUpgradeCardHTML(def, state);

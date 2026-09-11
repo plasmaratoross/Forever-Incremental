@@ -100,6 +100,66 @@ export const COSMIC_BADGES_DEFS = [
         auraColor: '#ff4800',
         imagePath: '../assets/images/badges/supernova.jpg',
         lore: 'The final magnificent explosion of a dying star, illuminating creation with supreme energy.'
+    },
+    {
+        id: 'quantum_hyper_surge',
+        name: 'QUANTUM HYPER-SURGE',
+        subtitle: 'Chrono Overdrive',
+        category: 'cosmic',
+        rarity: 'Cosmic Titan',
+        auraColor: '#06b6d4',
+        imagePath: '../assets/images/badges/quantum_hyper_surge.jpg',
+        lore: 'Time and momentum fuse into an unstoppable kinetic cascade, shattering all theoretical limits of speed.'
+    },
+    {
+        id: 'infinity_convergence',
+        name: 'INFINITY CONVERGENCE',
+        subtitle: 'Nexus of Reality',
+        category: 'cosmic',
+        rarity: 'Celestial Godhead',
+        auraColor: '#a855f7',
+        imagePath: '../assets/images/badges/infinity_convergence.jpg',
+        lore: 'All dimensional timelines converge into a singular focal point, flattening the infinite cost of creation.'
+    },
+    {
+        id: 'genesis_singularity',
+        name: 'GENESIS SINGULARITY',
+        subtitle: 'The Ultimate Jackpot',
+        category: 'cosmic',
+        rarity: 'Eternal Jackpot',
+        auraColor: '#ffd700',
+        imagePath: '../assets/images/badges/genesis_singularity.jpg',
+        lore: 'The primordial spark that birthed the multiverse ignites once more, unleashing unimaginable and limitless bounty.'
+    },
+    {
+        id: 'solar_flare_cataclysm',
+        name: 'SOLAR FLARE CATACLYSM',
+        subtitle: 'Stellar Wrath',
+        category: 'cosmic',
+        rarity: 'Catastrophic Apex',
+        auraColor: '#ff5722',
+        imagePath: '../assets/images/badges/solar_flare_cataclysm.jpg',
+        lore: 'A colossal surge of stellar coronal plasma engulfs reality, scorching away limits and igniting incandescent power.'
+    },
+    {
+        id: 'tectonic_rupture',
+        name: 'TECTONIC RUPTURE',
+        subtitle: 'Continental Fissure',
+        category: 'cosmic',
+        rarity: 'Catastrophic Titan',
+        auraColor: '#8d6e63',
+        imagePath: '../assets/images/badges/tectonic_rupture.jpg',
+        lore: 'The planetary mantle fractures along cosmic faults, unleashing primordial kinetic forces and unyielding resilience.'
+    },
+    {
+        id: 'supercell_world_devourer',
+        name: 'SUPERCELL WORLD-DEVOURER',
+        subtitle: 'Atmospheric Apocalypse',
+        category: 'cosmic',
+        rarity: 'Mythic Cataclysm (1 in 9,999)',
+        auraColor: '#00e5ff',
+        imagePath: '../assets/images/badges/supercell_world_devourer.jpg',
+        lore: 'A reality-consuming hyper-storm that obliterates planetary barriers, generating infinite kinetic vortices and legendary fortune.'
     }
 ];
 

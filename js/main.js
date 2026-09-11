@@ -12,6 +12,7 @@ import { renderHomeUI } from './ui/homeUI.js';
 import { optionsManager } from './options/options.js';
 import { loadGame } from './save/load.js';
 import { syncCosmicRuntimeWithState, tickCosmicEventsEngine } from './systems/cosmicEvents.js';
+import { gameEngine } from './core/game.js';
 
 /**
  * Initialize Main Menu Landing Page
@@ -23,17 +24,14 @@ function init() {
     // 2. Load saved game state & sync cosmic occasion visual themes to main menu
     loadGame();
     syncCosmicRuntimeWithState();
-    tickCosmicEventsEngine();
 
-    // Ticker to keep cosmic occasion state updated while on main menu
-    setInterval(() => {
-        tickCosmicEventsEngine();
-    }, 1000);
+    // 3. Start game loop ticker for background generation
+    gameEngine.start();
 
-    // 3. Render header banner navigation
+    // 4. Render header banner navigation
     renderMenu('menu-container');
 
-    // 4. Render Main Menu buttons and beginner guide
+    // 5. Render Main Menu buttons and beginner guide
     renderHomeUI('home-ui-container');
 }
 

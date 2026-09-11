@@ -24,14 +24,15 @@ function init() {
     // 1. Apply user preference settings
     optionsManager.applySettings();
 
-    // 2. Render header banner with "⬅ Back to Main Menu" return button
+    // 2. Restore saved progress from LocalStorage if available
+    const loaded = loadGame();
+
+    // 3. Render header banner with "⬅ Back to Main Menu" return button
     renderMenu('menu-container');
 
-    // 3. Render active game dashboard (clicker, point counter, rebirth)
+    // 4. Render active game dashboard (clicker, point counter, rebirth)
     renderGameUI('game-ui-container');
 
-    // 4. Restore saved progress from LocalStorage if available
-    const loaded = loadGame();
     if (loaded) {
         showNotification(t('saveLoadedMsg'));
     } else {

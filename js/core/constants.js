@@ -35,10 +35,14 @@ export const INITIAL_STATE = {
     debugUnlocked: false,            // Admin Debug Mode unlock flag (Unlocked via password in Settings)
     debugModeActive: false,          // Admin Debug Mode active toggle (ON/OFF, only visible after unlock)
     debugGameSpeed: 1.0,             // Admin Debug Game Speed multiplier (1.0x - 5.0x)
+    stardust: 0,                   // Stardust currency count (Unlocked at Rebirth 5 Multiplicity)
+    stardustUpgrades: {},          // Stardust Upgrades tracking map { [upgradeId]: level }
     rebirthUpgrades: {             // Permanent Rebirth Upgrades map (active automatically upon reaching required Rebirth)
-        efficient_instinct: false
+        efficient_instinct: false,
+        r4_power_bonus: false,
+        r5_power_bonus: false
     },
-    generators: {                  // Map of Point Generator levels { [genId]: level (0-10) }
+    generators: {                  // Map of Point Generator levels { [genId]: level (0-30) }
         condenser: 0,
         extractor: 0,
         reactor: 0,
@@ -51,18 +55,55 @@ export const INITIAL_STATE = {
         totalClicksAll: 0,              // Total lifetime clicks (manual + autoclicks)
         totalCurrencyEarned: 0,         // Total lifetime currency accumulated
         totalPointsEarned: 0,           // Total lifetime generator Points accumulated
+        totalStardustClicks: 0,         // Total lifetime manual Stardust clicks
+        totalStardustEarned: 0,         // Total lifetime Stardust accumulated
+        totalSuperCrits: 0,             // Total lifetime Super Crit occurrences
         playtime: 0,                    // Total active playtime in seconds
         highestPPS: 0,                  // Highest Points per Second (PPS) ever reached
         highestRebirth: 0,              // Highest Rebirth level achieved
         totalRebirths: 0,               // Total cumulative Rebirths performed
         eventsActivated: 0,             // Total Cosmic Events activated
         eventsDiscovered: {},           // Map of unique Cosmic Event IDs encountered { [eventId]: boolean }
-        timeInEvents: 0                 // Total time spent in Cosmic Events (seconds)
+        timeInEvents: 0,                // Total time spent in Cosmic Events (seconds)
+        highestTowerFloor: 1,           // Highest floor reached in Infinity Tower
+        totalTowerFloorsDefeated: 0,    // Total normal and boss floors defeated
+        totalTowerBossesDefeated: 0,    // Total boss floors defeated
+        totalTowerDamageDealt: 0,       // Total damage dealt to tower enemies
+        totalTowerAttacksMade: 0,       // Total attacks made by player in Tower
+        totalTowerRetaliationsReceived: 0, // Total retaliation hits received from enemies
+        totalTowerBossMechanicsEncountered: 0, // Total boss mechanics (armor, reduction, dodge) encountered
+        highestTowerEnemyHP: 0,         // Highest normal enemy HP encountered
+        highestTowerBossHP: 0,          // Highest boss HP encountered
+        towerNormalRewardsCount: 0,     // Total normal floor rewards claimed
+        towerBossRewardsCount: 0,       // Total boss floor rewards claimed
+        totalTowerTicketsUsed: 0,       // Total sweep tickets used
+        totalTowerFloorsSwept: 0,       // Total completed floors swept
+        towerClickPowerBonusEarned: 0,  // Total Click Power bonus earned from Tower
+        towerPointGenBonusEarned: 0,    // Total Point Gen bonus earned from Tower
+        towerStardustBonusEarned: 0,    // Total Stardust bonus earned from Tower
+        towerStardustSpentOnDamage: 0   // Total Stardust spent on Tower Damage upgrades
     },
     achievements: {                     // Achievements lore unlock tracking map { [loreKey]: boolean }
         loreUnlocked: {}
     },
     badges: {},                         // Cosmetic Badges unlock tracking map { [badgeId]: boolean }
-    badgeUpgrades: {}                   // Permanent Badge Upgrades purchase tracking map { [upgradeId]: boolean }
+    badgeUpgrades: {},                  // Permanent Badge Upgrades purchase tracking map { [upgradeId]: boolean }
+    tower: {                            // Infinity Tower endgame system state (Unlocked at Rebirth 5)
+        unlocked: false,
+        currentFloor: 1,
+        highestFloor: 1,
+        damageUpgradeLevel: 0,
+        tickets: 10,
+        maxTickets: 10,
+        lastTicketRecoveryTime: Date.now(),
+        floor1BaseHP: 0,
+        enemy: null,
+        bonuses: {
+            clickPower: 0,
+            pointGen: 0,
+            stardust: 0
+        },
+        combatLog: []
+    }
 };
 

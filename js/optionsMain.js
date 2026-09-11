@@ -12,6 +12,7 @@ import { renderOptionsUI } from './ui/optionsUI.js';
 import { optionsManager } from './options/options.js';
 import { loadGame } from './save/load.js';
 import { saveGame } from './save/save.js';
+import { gameEngine } from './core/game.js';
 
 /**
  * Initialize Options Page
@@ -23,13 +24,16 @@ function init() {
     // 2. Load saved game state
     loadGame();
 
-    // 3. Render header banner with "⬅ Back to Main Menu" return button
+    // 3. Start game ticker engine
+    gameEngine.start();
+
+    // 4. Render header banner navigation
     renderMenu('menu-container');
 
-    // 4. Render Settings controls (Audio, Particles, Language selector)
+    // 5. Render Settings controls (Audio, Particles, Language selector)
     renderOptionsUI('options-ui-container');
 
-    // 5. Register auto-save on page unload/navigation
+    // 6. Register auto-save on page unload/navigation
     window.addEventListener('beforeunload', () => saveGame());
     window.addEventListener('pagehide', () => saveGame());
 }

@@ -12,6 +12,7 @@ import { renderUpgradesUI } from './ui/upgradesUI.js';
 import { optionsManager } from './options/options.js';
 import { loadGame } from './save/load.js';
 import { saveGame } from './save/save.js';
+import { gameEngine } from './core/game.js';
 
 /**
  * Initialize Upgrades Page
@@ -23,13 +24,16 @@ function init() {
     // 2. Restore saved points balance and upgrades state from LocalStorage
     loadGame();
 
-    // 3. Render header banner with "⬅ Back to Main Menu" return button
+    // 3. Start game loop ticker so points continue generating passively
+    gameEngine.start();
+
+    // 4. Render header banner with navigation
     renderMenu('menu-container');
 
-    // 4. Render Clicking Upgrades UI container
+    // 5. Render Clicking Upgrades UI container
     renderUpgradesUI('upgrades-ui-container');
 
-    // 5. Register auto-save on page unload/navigation
+    // 6. Register auto-save on page unload/navigation
     window.addEventListener('beforeunload', () => saveGame());
     window.addEventListener('pagehide', () => saveGame());
 }
